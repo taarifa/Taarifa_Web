@@ -2,12 +2,12 @@
 /**
  * Locale helper
  *
- * @package    Locale
+ * @package    Ush_Locale
  * @author     Ushahidi Team
  * @copyright  (c) 2008 Ushahidi Team
  * @license    http://www.ushahidi.com/license.html
  */
-class locale_Core
+class ush_locale_Core
 {
 	/**
 	 * @param   string	 ISO-639 language code
@@ -497,14 +497,14 @@ class locale_Core
 			{
 				// Strip out .  and .. and any other stuff
 				if ( $i18n_dir{0} == '.' || $i18n_dir == '..'
-				 	|| $i18n_dir ==  '.DS_Store' || $i18n_dir == '.git')
+					|| $i18n_dir ==  '.DS_Store' || $i18n_dir == '.git')
 					continue;
 
 				$locale = explode("_", $i18n_dir);
 				if ( count($locale) < 2 )
 					continue;
 
-				$directories[$i18n_dir] = locale::language($locale[0])." (".$locale[1].")";
+				$directories[$i18n_dir] = ush_locale::language($locale[0])." (".$locale[1].")";
 			}
 		}
 
