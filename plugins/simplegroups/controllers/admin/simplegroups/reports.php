@@ -47,7 +47,7 @@ class Reports_Controller extends Admin_simplegroup_Controller {
   		$status = $_GET['status'];
   	}
   	else {
-  		$status = "0";
+  		$status = 'all';
 	  }
     
     $this->template->content->status = $status;
