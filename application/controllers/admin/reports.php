@@ -463,12 +463,18 @@ class Reports_Controller extends Admin_Controller {
 					$form['latitude'] = $message->reporter->location->latitude;
 					$form['longitude'] = $message->reporter->location->longitude;
 					$form['location_name'] = $message->reporter->location->location_name;
-					
-					$form['latitude'] = -2.22;
-					$form['longitude'] = -3.33;
 				}else{
-					$form['latitude'] = -1.11;
-					$form['longitude'] = -9.99;
+					//HACK!
+					$regex_pattern = "/#\d{10}/";
+					preg_match_all($regex_pattern,$incident_description,$matches,1);
+					if(count($matches) == 1){
+						$id = substr($matches[0][0],1);
+						
+						$pc = new Postcode();
+						$coords = $pc->id2coords($id);
+						$form['latitude'] = $coords[0];
+						$form['longitude'] = $coords[1];
+					}
 				}
 
 				//Events to manipulate an already known location
