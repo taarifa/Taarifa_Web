@@ -335,6 +335,7 @@ class Reports_Controller extends Admin_Controller {
 			'incident_minute' => '',
 			'incident_ampm' => '',
 			'incident_status' => '',
+			'phone_number' => '',
 			'latitude' => '',
 			'longitude' => '',
 			'geometry' => array(),
@@ -735,6 +736,7 @@ class Reports_Controller extends Admin_Controller {
 						'incident_minute' => date('i', strtotime($incident->incident_date)),
 						'incident_ampm' => date('a', strtotime($incident->incident_date)),
 						'incident_status' => $incident->incident_status,
+						'phone_number' => $incident->get_message_from(),
 						'latitude' => $incident->location->latitude,
 						'longitude' => $incident->location->longitude,
 						'location_name' => $incident->location->location_name,
@@ -824,7 +826,6 @@ class Reports_Controller extends Admin_Controller {
 		$myPacker = new javascriptpacker($this->template->js , 'Normal', false, false);
 		$this->template->js = $myPacker->pack();
 	}
-
 
 	/**
 	 * Download Reports in CSV format

@@ -522,6 +522,13 @@ class Incident_Model extends ORM {
 		return $incident->save();
 	}
 	
+	public function get_message_from() {
+	  $message = ORM::factory('message')
+	    ->where(array('incident_id' => $this->id))
+	    ->find();
+	  return $message->message_from;
+	}
+	
 	/**
 	 * Sets incident as fixed or not
 	 * @param int $incident_id
@@ -539,6 +546,11 @@ class Incident_Model extends ORM {
 	{
 		$incident = ORM::factory('incident', $incident_id);
 		return $incident->incident_status;
+	}
+	
+	public function get_phone_number($incident_id) {
+	  $incident = ORM::factory('incident', $incident_id);
+		return $incident->incident_number;
 	}
 
 	/**

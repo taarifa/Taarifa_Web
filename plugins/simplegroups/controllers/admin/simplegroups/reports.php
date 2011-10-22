@@ -519,6 +519,7 @@ class Reports_Controller extends Admin_simplegroup_Controller {
         'incident_video' => array(),
         'incident_photo' => array(),
         'incident_status' => array(),
+        'phone_number' => '',
         'person_first' => '',
         'person_last' => '',
         'person_email' => '',
@@ -544,7 +545,8 @@ class Reports_Controller extends Admin_simplegroup_Controller {
         $form['incident_hour'] = date('h');
         $form['incident_minute'] = date('i');
         $form['incident_ampm'] = date('a');
-        $form['incident_status'] = $this->_get_incident_status($id);
+        $form['incident_status'] = $this->_get_status($id);
+        $form['phone_number'] = $this->_get_phone_number($id);
         // initialize custom field array
         $form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
 		$number_of_message_sender = null;
