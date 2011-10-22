@@ -45,19 +45,5 @@ class Postcode {
     }
 }
 
-$pc = new Postcode();
-
-$lat = -7.013668;
-$long = 34.89257;
-
-print "orig: " . strval($lat) . "  " . strval($long) . "\n";
-
-$id = $pc->coords2id($lat,$long);
-
-print "id: " . $id  . "\n";
-
-$coords = $pc->id2coords($id);
-
-print "back: " . strval($coords[0]) . "  " . strval($coords[1])  . "\n";
 
 ?>

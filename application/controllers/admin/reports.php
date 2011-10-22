@@ -14,6 +14,8 @@
  * @license	   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 
+include "postcode.php";
+ 
 class Reports_Controller extends Admin_Controller {
 	public function __construct()
 	{
