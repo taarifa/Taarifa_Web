@@ -1,4 +1,8 @@
 <?php
+//The postcode is the simple concatenation of the row/col index of
+//a cell in the grid drawn over TZ
+//Very very rough, very very hacky, total disregard for the earths curvature
+//but hey, it does something :)
 class Postcode {
 	private $tr_lat,$tr_long;
 	private $bl_lat, $bl_long;
@@ -7,12 +11,16 @@ class Postcode {
 	private $pad;
  
  	public function __construct() {
-		$this->tr_lat = -1.1864386394452024;
-		$this->tr_long = 41.1767578125;
+ 		//make a *very* rough bounding box arond TZ
+ 		//using top-right and bottom-left corners
+		$this->tr_lat = -1.186;
+		$this->tr_long = 41.176;
 		
-		$this->bl_lat = -12.254128;
-		$this->bl_long = 29.003906;
-	
+		$this->bl_lat = -12.254;
+		$this->bl_long = 29.004;
+		
+		//*roughly* 1400 by 1300 km
+		//we want grid cells of 100m^2, so divide by 1400*1000/100
 		$this->lat_step = 14000;
 		$this->long_step = 13000;
 	
@@ -24,7 +32,8 @@ class Postcode {
 	
 	public function coords2id($lat, $long) {
 		$lat_id = floor(($lat - $this->bl_lat) / $this->latdiff);
-    	$long_id = floor(($long - $this->bl_long) / $this->longdiff);    	
+    	$long_id = floor(($long - $this->bl_long) / $this->longdiff);
+		//simply join both coords padded to a fixed length    	
     	$id = str_pad(strval($lat_id),$this->pad,"0",STR_PAD_LEFT) . str_pad(strval($long_id),$this->pad,"0",STR_PAD_LEFT);
     	
     	return $id;
