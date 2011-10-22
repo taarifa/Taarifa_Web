@@ -22,8 +22,6 @@ class Reports_Controller extends Admin_Controller {
 		parent::__construct();
 
 		$this->template->this_page = 'reports';
-		
-		$this->load->helper('sms');
 	}
 
 
@@ -502,6 +500,7 @@ class Reports_Controller extends Admin_Controller {
 				//send a confirmation message that we got it
 				//should really do this later, but no time and this is easier :)
 				//sms_Core::add(123456789,"Your report has been received",$message->message_from);
+				include '../../helpers/sms.php';
 				sms_Core::add(123456789,"Your report has been received","447763806809");
 			}
 			else
