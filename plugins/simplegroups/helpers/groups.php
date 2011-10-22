@@ -30,6 +30,7 @@ class groups_Core {
 		$group = ORM::factory("simplegroups_groups", $group_id);
 		// Set to assigned
 		Incident_Model::set_status($incident_id, 3);
+		Incident_Model::set_verification($incident_id, 1);
 		if($group->own_instance == null || strlen($group->own_instance) < 4)
 		{
 			return; // they don't have an instance

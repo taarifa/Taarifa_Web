@@ -138,6 +138,12 @@ class Admin_simplegroup_Controller extends Template_Controller
 
 		url::redirect('login');
 	}
+	
+	function remove_group() {
+    $this->auto_render = FALSE;
+		$this->template = '';
+		print "YES";
+  }
 
     /**
      * Fetches the latest ushahidi release version number

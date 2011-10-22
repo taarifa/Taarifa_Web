@@ -53,7 +53,7 @@ class Reports_Controller extends Admin_Controller {
 				array_push($params, 'i.incident_status = 0');
 			}
 			elseif($status == 't') {
-			  array_push($params, 'i.incident_status = 2');
+			  array_push($params, 'i.incident_verified = 1 AND i.incident_status < 3');
 			}
 			elseif($status == 'f') {
 			  array_push($params, 'i.incident_status = 3');
@@ -1268,8 +1268,56 @@ class Reports_Controller extends Admin_Controller {
 		// Javascript Header
 		$this->template->js = new View('admin/reports_translate_js');
 	}
+	
+	/*
+	 * Should be in simple groups but it isn't.
+	 */
+	public function remove_group() {
+    $this->auto_render = FALSE;
+		$this->template = '';
+		json_encode('moo');
+		if($_POST) {
+		  // Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
+			$post = Validation::factory($_POST);
+			$post->pre_filter('trim', TRUE);
+			// Add rules
+			$post->add_rules('incident_id', 'required');
+			$post->add_rules('group_id', 'required');
+			
+			if($post->validate()) {
+			  $incident = ORM::factory('simplegroups_groups_incident')
+  			  ->where(array('incident_id' => $post['incident_id'], 'simplegroups_groups_id' => $post['group_id']))
+  			  ->delete_all();
+			}
+		}
+  }
 
-
+  /*
+	 * Change report status, based on drop-down list
+	 * Currently only works for post
+	 */
+  public function change_status($form_id = 0, $incident_id = 0, $status = 0) {
+    $this->auto_render = FALSE;
+		$this->template = "";
+		
+    if($_POST) {
+      // Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
+			$post = Validation::factory($_POST);
+			$post->pre_filter('trim', TRUE);
+			// Add rules
+			$post->add_rules('incident_id', 'required');
+			$post->add_rules('status', 'required');
+			
+			if($post->validate()) {
+			  $incident = ORM::factory('incident', $_POST['incident_id']);
+			  // Only if the incident exists
+			  if($incident->id) {
+			    $incident->incident_status = $_POST['status'];
+			    $incident->save();
+			  }
+			}
+    }
+  }
 
 
 	/**

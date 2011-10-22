@@ -860,16 +860,11 @@
 			feature.layer.drawFeature(feature);
 		}
 		
-		function changeStatus(form_id, incident_id) {
-		  var answer = confirm('Are you sure you want to change the status of this form?');
-		  if(answer) {
-		    $.post("<?php echo url::base() . 'admin/simplegroups/reports/change_status' ?>", { form_id: form_id, incident_id: incident_id },
-					function(data){
-						if (data.status == 'success'){
-							
-						}
-				  }, "json");
-		  }
+		function changeStatus(status, incident_id) {
+	    $.post("<?php echo url::base() . 'admin/reports/change_status' ?>", { status: status, incident_id: incident_id },
+				function(data){
+					console.log(data);
+			  }, "json");
 		}
 		
 		// Reverse GeoCoder

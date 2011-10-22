@@ -1,21 +1,20 @@
 <?php $group_page = url::site()."simplegroups/index/".$group_id; ?>
-<?php echo html::script("media/js/groups.js"); ?>
+<?php echo html::script('media/js/groups.js'); ?>
 
 	<br/>
 	<br/>
 	
-		<div>
+		<div id="group<?php echo $group_id ?>">
 		<h5 style="font-size:14px;border-top:1px dotted #c0c2b8;"><?php echo Kohana::lang('simplegroups.credit_group');?></h5>
 		<?php echo Kohana::lang('simplegroups.created');?><a style="float:none;font-size:14px;" href="<?php echo $group_page; ?>"> <?php echo $group_name; ?></a>
-		<?php /* <span class="delete_button" onClick="removeAssignment('<?php echo $group_id ?>', '<?php echo $group_name ?>'); return false;">Remove assignment</span> */ ?>
+		<span class="delete_button" onClick="removeGroup('<?php echo $group_id ?>', '<?php $id = explode('/', url::current()); echo $id[3] ?>'); return false;">Remove assignment</span>
 		<?php
 			$thumb = $logo_file."_t.jpg";
 			$prefix = url::base().Kohana::config('upload.relative_directory')."/groups";
-				print "<br/><a style=\"float:none;\" href='$group_page'>";
-				print "<img src=\"$prefix/$thumb\" >";
-				print "</a>";
+			print "<br/><a style=\"float:none;\" href='$group_page'>";
+			print "<img src=\"$prefix/$thumb\" alt=\"\"\>";
+			print "</a>";
 		?>
-		</div>
 		<h5 style="font-size:14px;border-top:1px dotted #c0c2b8;"><?php echo Kohana::lang('simplegroups.categories_report');?></h5>
 			<p>
 			<?php
@@ -48,3 +47,4 @@
 				}
 			?>
 			</p>
+			</div>

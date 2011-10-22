@@ -485,82 +485,55 @@ class Reports_Controller extends Admin_simplegroup_Controller {
         }
     }//end method
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /**
     * Edit a report
     * @param bool|int $id The id no. of the report
     * @param bool|string $saved
     */
-    function edit( $id = false, $saved = false )
-    {
-
-	$db = new Database();
+    function edit( $id = false, $saved = false ) {
+    	$db = new Database();
 	
         //$this->template->content = new View('admin/reports_edit');
-	$this->template->content = View::factory('simplegroups/reports_edit');	
-        $this->template->content->title = Kohana::lang('ui_admin.create_report');
+	    $this->template->content = View::factory('simplegroups/reports_edit');	
+      $this->template->content->title = Kohana::lang('ui_admin.create_report');
 
-        // setup and initialize form field names
-        $form = array
-        (
-            'location_id'      => '',
-            'form_id'      => '',
-            'locale'           => '',
-            'incident_title'      => '',
-            'incident_description'    => '',
-            'incident_date'  => '',
-            'incident_hour'      => '',
-            'incident_minute'      => '',
-            'incident_ampm' => '',
-            'latitude' => '',
-            'longitude' => '',
-	    	    'geometry' => array(),
-            'location_name' => '',
-            'country_id' => '',
-            'incident_category' => array(),
-	    	    'incident_group_category' => array(),
-            'incident_news' => array(),
-            'incident_video' => array(),
-            'incident_photo' => array(),
-            'incident_status' => array(),
-            'person_first' => '',
-            'person_last' => '',
-            'person_email' => '',
-            'custom_field' => array(),
-            'incident_active' => '',
-            'incident_verified' => '',
-            //'incident_source' => '',
-            //'incident_information' => '',
-	    	'incident_zoom' => ''
-        );
+      // setup and initialize form field names
+      $form = array(
+        'location_id'      => '',
+        'form_id'      => '',
+        'locale'           => '',
+        'incident_title'      => '',
+        'incident_description'    => '',
+        'incident_date'  => '',
+        'incident_hour'      => '',
+        'incident_minute'      => '',
+        'incident_ampm' => '',
+        'latitude' => '',
+        'longitude' => '',
+  	    'geometry' => array(),
+        'location_name' => '',
+        'country_id' => '',
+        'incident_category' => array(),
+  	    'incident_group_category' => array(),
+        'incident_news' => array(),
+        'incident_video' => array(),
+        'incident_photo' => array(),
+        'incident_status' => array(),
+        'person_first' => '',
+        'person_last' => '',
+        'person_email' => '',
+        'custom_field' => array(),
+        'incident_active' => '',
+        'incident_verified' => '',
+        //'incident_source' => '',
+        //'incident_information' => '',
+  	    'incident_zoom' => ''
+      );
 
         //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
         $errors = $form;
         $form_error = FALSE;
-        if ($saved == 'saved')
-        {
-            $form_saved = TRUE;
-        }
-        else
-        {
-            $form_saved = FALSE;
-        }
+        $form_saved = $saved;
 
         // Initialize Default Values
         $form['locale'] = Kohana::config('locale.language');
