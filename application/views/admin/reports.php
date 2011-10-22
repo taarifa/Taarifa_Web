@@ -230,6 +230,15 @@
 												<li class="none-separator"><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
 												<li><a href="#" class="del" onclick="reportAction('d','DELETE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
 											</ul>
+											<ul>
+											  <li class="none-separator" style="width:140px; text-align: right"><h4>
+											    <?php // Horrible hack to display status in 5 minutes
+											      if($incident->incident_verified == 0) echo "Awaiting verification";
+											      else if($incident->incident_status == 2 || $incident->incident_verified == 1) echo "Awaiting triage";
+											      else if($incident->incident_status == 3) echo "Awaiting fix";
+											      else if($incident->incident_status == 4) echo "Dispute resolution";
+											    ?></h4>
+											</ul>
 										</td>
 									</tr>
 									<?php
