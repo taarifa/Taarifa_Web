@@ -345,7 +345,7 @@ class Incident_Model extends ORM {
 
 		// Query
 		$sql = 'SELECT DISTINCT i.id incident_id, i.incident_title, i.incident_description, i.incident_date, i.incident_mode, i.incident_active, '
-			. 'i.incident_verified, i.location_id, l.country_id, l.location_name, l.latitude, l.longitude ';
+			. 'i.incident_verified, i.incident_status, i.location_id, l.country_id, l.location_name, l.latitude, l.longitude ';
 
 		// Check if all the parameters exist
 		if (count($radius) > 0 AND array_key_exists('latitude', $radius) AND array_key_exists('longitude', $radius)
