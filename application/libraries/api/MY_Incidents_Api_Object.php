@@ -639,6 +639,9 @@ class Incidents_Api_Object extends Api_Object_Core {
 			// Check for response type
 			if ($this->response_type == 'json')
 			{
+				//hack!
+				$incident = ORM::factory('incident', $item->incident_id);
+			
 				$json_reports[] = array(
 					"incident" => array(
 						"incidentid" => $item->incident_id,
@@ -648,7 +651,9 @@ class Incidents_Api_Object extends Api_Object_Core {
 						"incidentmode" => $item->incident_mode,
 						"incidentactive" => $item->incident_active,
 						"incidentverified" => $item->incident_verified,
-						"incidentstatus" => $item->incident_status,
+						
+						
+						"incidentstatus" => $incident->incident_status,
 						"locationid" => $item->location_id,
 						"locationname" => $item->location_name,
 						"locationlatitude" => $item->latitude,
