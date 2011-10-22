@@ -14,7 +14,7 @@
  * @license	   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 
-include "postcode.php";
+include "locationcode.php";
  
 class Reports_Controller extends Admin_Controller {
 	public function __construct()
@@ -466,14 +466,14 @@ class Reports_Controller extends Admin_Controller {
 					$form['longitude'] = $message->reporter->location->longitude;
 					$form['location_name'] = $message->reporter->location->location_name;
 				}else{
-					//HACK!
+					//see if the message contains a hash followed by a 10 digit number
 					$regex_pattern = "/#\d{10}/";
 					preg_match_all($regex_pattern,$incident_description,$matches,1);
 					if(count($matches[0]) == 1){
-						
+						//extract the number
 						$id = substr($matches[0][0],1);
-						
-						$pc = new Postcode();
+						//convert to a location code
+						$pc = new LocationCode();
 						$coords = $pc->id2coords($id);
 						$form['latitude'] = $coords[0];
 						$form['longitude'] = $coords[1];
