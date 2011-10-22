@@ -24,6 +24,9 @@
 						<li><a id="status_filter_0" href="#" onclick="changeStatus('0'); return false;" <?php if ($status != 'a' && $status !='v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a></li>
 						<li><a id="status_filter_a"href="#" onclick="changeStatus('a'); return false;"<?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_approval');?></a></li>
 						<li><a id="status_filter_v"href="#" onclick="changeStatus('v'); return false;"<?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
+						<li><a id="status_filter_t"href="#" onclick="changeStatus('t'); return false;"<?php if ($status == 't') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_triage');?></a></li>
+						<li><a id="status_filter_f"href="#" onclick="changeStatus('f'); return false;"<?php if ($status == 'f') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_fix');?></a></li>
+						<li><a id="status_filter_d"href="#" onclick="changeStatus('d'); return false;"<?php if ($status == 'd') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.dispute_resolution');?></a></li>
 					</ul>
 					<!-- tab -->
 					<div class="tab">

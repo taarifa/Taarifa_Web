@@ -52,10 +52,10 @@ class simplegroups {
 		//adds info about the person that sent in messages
 		Event::add('ushahidi_action.message_extra_admin',array($this, '_get_number_info_for_message'));
 		
-		//hook into the message action hook so we can add the "forward too" action
+		//hook into the message action hook so we can add the "forward to" action
 		Event::add('ushahidi_action.message_extra_admin',array($this, '_add_forward_to'));
 		
-		//hook into the generation of the list of reports and add a "forward too" button, just like what messages has
+		//hook into the generation of the list of reports and add a "forward to" button, just like what messages has
 		Event::add('ushahidi_action.report_extra_admin',array($this, '_add_forward_to')); 
 		
 		//hook into the user edit page so we can choose which group a user is in when they are created

@@ -46,15 +46,24 @@ class Reports_Controller extends Admin_Controller {
 		
 		if ( !empty($_GET['status']))
 		{
-			$status = $_GET['status'];
+			$status = strtolower($_GET['status']);
 
-			if (strtolower($status) == 'a')
+			if ($status == 'a')
 			{
 				array_push($params, 'i.incident_active = 0');
 			}
-			elseif (strtolower($status) == 'v')
+			elseif ($status == 'v')
 			{
 				array_push($params, 'i.incident_verified = 0');
+			}
+			elseif($status == 't') {
+			  array_push($params, 'i.incident_verified = 1');
+			}
+			elseif($status == 'f') {
+			  array_push($params, 'i.incident_assigned = 1 AND i.incident_verified = 1');
+			}
+			elseif($status == 'd') {
+			  array_push($params, 'i.incident_disputed = 1');
 			}
 			else
 			{

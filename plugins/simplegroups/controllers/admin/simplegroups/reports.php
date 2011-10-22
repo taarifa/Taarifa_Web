@@ -77,16 +77,28 @@ class Reports_Controller extends Admin_simplegroup_Controller
 		//Setup the filters and such.
 		if (!empty($_GET['status']))
 		{
-			$status = $_GET['status'];
+			$status = strtolower($_GET['status']);
 
-			if (strtolower($status) == 'a')
+			if ($status == 'a')
 			{
-			$filter = 'incident_active = 0';
+			  $filter = 'incident_active = 0';
 			}
-			elseif (strtolower($status) == 'v')
+			elseif ($status == 'v')
 			{
-			$filter = 'incident_verified = 0';
+			  $filter = 'incident_verified = 0';
 			}
+			elseif ($status == 't')
+      {
+          $filter = 'incident.incident_verified = 1';
+      }
+      elseif ($status == 'f')
+      {
+          $filter = 'incident.incident_assigned = 1';
+      }
+      elseif ($status == 'd')
+      {
+          $filter = 'incident.incident_disputed = 0';
+      }
 			else
 			{
 			$status = "0";
@@ -349,24 +361,19 @@ class Reports_Controller extends Admin_simplegroup_Controller
 		
 		return $category_array;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    
 	
-	
+	// ajax call to delete the group
+	function delete($gid, $pid) {
+    if(request::is_ajax()) {
+      $this->template->content= "othing yet";
+/*      $this->auto_render = false; //Disable the auto renderer, we don want a layout in our ajax response
+      $result = ORM::factory('simplegroups_groups_incident', (int) $id)->delete(); //delete the group 
+      echo json_encode($result); //return a json encoded result */
+    }
+    else {
+      $this->template->content= "othing yet";
+    }
+	}
 	
 	//ajax calls to updated the report list come in here
 	function get_table()

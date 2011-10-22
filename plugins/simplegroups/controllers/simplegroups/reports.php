@@ -54,15 +54,27 @@ class Reports_Controller extends Main_Controller
 
         if (!empty($_GET['status']))
         {
-            $status = $_GET['status'];
+            $status = strtolower($_GET['status']);
 
-            if (strtolower($status) == 'a')
+            if ($status == 'a')
             {
                 $filter = 'incident.incident_active = 0';
             }
-            elseif (strtolower($status) == 'v')
+            elseif ($status == 'v')
             {
                 $filter = 'incident.incident_verified = 0';
+            }
+            elseif ($status == 't')
+            {
+                $filter = 'incident.incident_verified = 1';
+            }
+            elseif ($status == 'f')
+            {
+                $filter = 'incident.incident_assigned = 1';
+            }
+            elseif ($status == 'd')
+            {
+                $filter = 'incident.incident_disputed = 0';
             }
             else
             {

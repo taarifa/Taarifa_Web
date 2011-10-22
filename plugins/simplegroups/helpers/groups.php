@@ -28,6 +28,7 @@ class groups_Core {
 	{
 		//first get the group in question and see if they've specified a site
 		$group = ORM::factory("simplegroups_groups", $group_id);
+		Incident_Model::set_assigned($incident_id, 1);
 		if($group->own_instance == null || strlen($group->own_instance) < 4)
 		{
 			return; // they don't have an instance
@@ -40,7 +41,7 @@ class groups_Core {
 		{
 			if ($category->category->category_title)
 			{
-			$cat_str .= $category->category->category_title. "\r\n<br/>";
+			  $cat_str .= $category->category->category_title. "\r\n<br/>";
 			}
 		}
 		
@@ -62,8 +63,6 @@ class groups_Core {
 		{
 			$group_cat_str = "\r\n\r\n<br/><br/>Categories assigned to this report from the group: ".$group->name." \r\n\r\n<br/><br/>".$group_cat_str;
 		}
-		
-		
 		
 		$incident->incident_description .= "<br/><br/>\r\n\r\n".$cat_str.$group_cat_str;
 		

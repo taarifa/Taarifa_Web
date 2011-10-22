@@ -1,4 +1,5 @@
 <?php $group_page = url::site()."simplegroups/index/".$group_id; ?>
+<?php echo html::script("media/js/groups.js"); ?>
 
 	<br/>
 	<br/>
@@ -6,6 +7,7 @@
 		<div>
 		<h5 style="font-size:14px;border-top:1px dotted #c0c2b8;"><?php echo Kohana::lang('simplegroups.credit_group');?></h5>
 		<?php echo Kohana::lang('simplegroups.created');?><a style="float:none;font-size:14px;" href="<?php echo $group_page; ?>"> <?php echo $group_name; ?></a>
+		<?php /* <span class="delete_button" onClick="removeAssignment('<?php echo $group_id ?>', '<?php echo $group_name ?>'); return false;">Remove assignment</span> */ ?>
 		<?php
 			$thumb = $logo_file."_t.jpg";
 			$prefix = url::base().Kohana::config('upload.relative_directory')."/groups";

@@ -22,10 +22,13 @@
 					<!-- tabset -->
 					<ul class="tabset">
 						<li>
-							<a href="?status=0" <?php if ($status != 'a' AND $status !='v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
+							<a href="?status=0" <?php if (!in_array($status, array('a', 'v', 't', 'f', 'd'))) echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
 						</li>
 						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_approval');?></a></li>
 						<li><a href="?status=v" <?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
+						<li><a href="?status=t" <?php if ($status == 't') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_triage');?></a></li>
+						<li><a href="?status=f" <?php if ($status == 'f') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_fix');?></a></li>
+						<li><a href="?status=d" <?php if ($status == 'd') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.dispute_resolution');?></a></li>
 					</ul>
 					<!-- tab -->
 					<div class="tab">

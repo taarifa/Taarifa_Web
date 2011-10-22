@@ -36,9 +36,5 @@ function isChecked( id )
 	//var checked = $("input[id="+id+"]:checked").length
 	var checked = $("td > input:checked").length
 	
-	if( checked == 0 )
-	return false
-	
-	else 
-	return true
+	return checked != 0;
 }

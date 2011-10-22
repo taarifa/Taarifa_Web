@@ -521,6 +521,19 @@ class Incident_Model extends ORM {
 		$incident->incident_active = $val;
 		return $incident->save();
 	}
+	
+	/**
+	 * Sets incident as fixed or not
+	 * @param int $incident_id
+	 * @param int $val Set to 1 or 0 for verified or not verified
+	 * @return bool
+	 */
+	public static function set_assigned($incident_id, $val)
+	{
+		$incident = ORM::factory('incident', $incident_id);
+		$incident->incident_assigned = $val;
+		return $incident->save();
+	}
 
 	/**
 	 * Sets incident as verified or not
