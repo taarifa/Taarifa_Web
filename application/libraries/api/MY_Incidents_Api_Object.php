@@ -479,7 +479,10 @@ class Incidents_Api_Object extends Api_Object_Core {
 			$xml->writeElement('mode',$item->incident_mode);
 			$xml->writeElement('active',$item->incident_active);
 			$xml->writeElement('verified',$item->incident_verified);
-      $xml->writeElement('status',$item->incident_status);
+			
+			$incident = ORM::factory('incident', $item->incident_id);
+			$xml->writeElement('status',$incident->incident_status);
+			
 			$xml->startElement('location');
 			$xml->writeElement('id',$item->location_id);
 			$xml->writeElement('name',$item->location_name);
