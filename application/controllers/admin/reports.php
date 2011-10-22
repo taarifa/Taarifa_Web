@@ -462,6 +462,12 @@ class Reports_Controller extends Admin_Controller {
 					$form['latitude'] = $message->reporter->location->latitude;
 					$form['longitude'] = $message->reporter->location->longitude;
 					$form['location_name'] = $message->reporter->location->location_name;
+					
+					$form['latitude'] = -2.22;
+					$form['longitude'] = -3.33;
+				}else{
+					$form['latitude'] = -1.11;
+					$form['longitude'] = -9.99;
 				}
 
 				//Events to manipulate an already known location
