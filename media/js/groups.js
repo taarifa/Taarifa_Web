@@ -3,6 +3,10 @@ function removeGroup(group_id, incident_id) {
     function(data){
       // Remove the group and change the status
       $('#group' + group_id).remove();
-      $('#form_id').val(2);
+      // If there are no groups left, then change the status
+      if($('*[id^="group"]').length < 1) {
+        $('#incident_status').val(2);
+        $.post('/admin/reports/change_status', { status: 2, incident_id: incident_id }, function() {});
+      }
     });
 }

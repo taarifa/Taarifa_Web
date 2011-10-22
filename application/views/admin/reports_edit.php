@@ -99,7 +99,7 @@
 							  <h4>Status</h4>
 							  <span class="sel-holder">
 							    <?php $selection = array('Pending', 'Approved/Verified', 'In triage', 'Awaiting repair', 'Disputed', 'Finished'); ?>
-									<?php print form::dropdown('form_id', $selection, $form['incident_status'],
+									<?php print form::dropdown('incident_status', $selection, $form['incident_status'],
 										' onchange="changeStatus(this.options[this.selectedIndex].value, \''.$id.'\')"') ?>
 								</span>
 							</div>
@@ -426,7 +426,14 @@
 								print "<input type=\"hidden\" name=\"$this_startid\" value=\"$i\" id=\"$this_startid\">";
 								?>
 							</div>
+							<?php if (!empty($form['phone_number'])): ?>
+							  <div class="row rowlink">
+						      <h4>Phone Number</h4>
+						    </div>
+						    <span id="phoneNumber"><?php echo $form['phone_number'] ?></span>
+						  <?php endif ?>
 						</div>
+						
 						<!-- f-col-bottom -->
 						<div class="f-col-bottom-container">
 							<div class="f-col-bottom">
