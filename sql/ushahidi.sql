@@ -354,6 +354,7 @@ CREATE TABLE IF NOT EXISTS `incident` (
     `incident_dateadd_gmt` datetime default NULL,                                   
     `incident_datemodify` datetime default NULL,                                    
     `incident_alert_status` TINYINT NOT NULL DEFAULT '0' COMMENT '0 - Not Tagged for Sending, 1 - Tagged for Sending, 2 - Alerts Have Been Sent',
+    `incident_identifier` varchar(255) default NULL,                                     
 	`incident_zoom` tinyint NULL DEFAULT NULL,
   PRIMARY KEY  (`id`),
   KEY `location_id` (`location_id`),
