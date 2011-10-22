@@ -479,6 +479,7 @@ class Incidents_Api_Object extends Api_Object_Core {
 			$xml->writeElement('mode',$item->incident_mode);
 			$xml->writeElement('active',$item->incident_active);
 			$xml->writeElement('verified',$item->incident_verified);
+      $xml->writeElement('status',$item->incident_status);
 			$xml->startElement('location');
 			$xml->writeElement('id',$item->location_id);
 			$xml->writeElement('name',$item->location_name);
@@ -644,6 +645,7 @@ class Incidents_Api_Object extends Api_Object_Core {
 						"incidentmode" => $item->incident_mode,
 						"incidentactive" => $item->incident_active,
 						"incidentverified" => $item->incident_verified,
+						"incidentstatus" => $item->incident_status,
 						"locationid" => $item->location_id,
 						"locationname" => $item->location_name,
 						"locationlatitude" => $item->latitude,
