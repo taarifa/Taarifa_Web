@@ -14,99 +14,81 @@
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL)
  */
 
-class Reports_Controller extends Admin_simplegroup_Controller
-{
-    function __construct()
-    {
-        parent::__construct();
+class Reports_Controller extends Admin_simplegroup_Controller {
+  function __construct() {
+    parent::__construct();
+    $this->template->this_page = 'reports';
+  }
 
-        $this->template->this_page = 'reports';
-    }
+  /**
+  * Lists the reports.
+  * @param int $page
+  */
+  function index($page = 1) {
+    $this->template->content = new View('simplegroups/reports');
+    $this->template->content->title = Kohana::lang('ui_admin.reports');
 
+    // check, has the form been submitted?
+    $form_error = FALSE;
+    $form_saved = FALSE;
+    $form_action = "";
+      
+	  $this->handle_post_variables();
+    $db = new Database;
 
-    /**
-    * Lists the reports.
-    * @param int $page
-    */
-    function index($page = 1)
-    {
-
-        $this->template->content = new View('simplegroups/reports');
-        $this->template->content->title = Kohana::lang('ui_admin.reports');
-
-        // check, has the form been submitted?
-        $form_error = FALSE;
-        $form_saved = FALSE;
-        $form_action = "";
+  	$this->template->content = $this->setup_report_table($this->template->content);
+    $this->template->content->form_error = $form_error;
+    $this->template->content->form_saved = $form_saved;
+    $this->template->content->form_action = $form_action;
+  	$this->template->content->category_array = $this->setup_category_dropdown_filter();
         
-	$this->handle_post_variables();
-
-
-	$db = new Database;
-
-
-	$this->template->content = $this->setup_report_table($this->template->content);
-		
-        $this->template->content->form_error = $form_error;
-        $this->template->content->form_saved = $form_saved;
-        $this->template->content->form_action = $form_action;
-	$this->template->content->category_array = $this->setup_category_dropdown_filter();
-        
-	// Status Tab
-	if (!empty($_GET['status']))
-	{
-		$status = $_GET['status'];
-	}
-	else
-	{
-		$status = "0";
-	}
-        $this->template->content->status = $status;
-
-        // Javascript Header
-        $this->template->js = new View('simplegroups/reports_js');
-    }//end of index()
-
-
-
+  	// Status Tab
+  	if (!empty($_GET['status'])) {
+  		$status = $_GET['status'];
+  	}
+  	else {
+  		$status = "0";
+	  }
+    
+    $this->template->content->status = $status;
+    
+    // Javascript Header
+    $this->template->js = new View('simplegroups/reports_js');
+  }
 
 	//creates the table of messages
-	private function setup_report_table($view)
-	{
+	private function setup_report_table($view) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Setup the filters and such.
-		if (!empty($_GET['status']))
-		{
+		if (!empty($_GET['status'])) {
 			$status = strtolower($_GET['status']);
 
-			if ($status == 'a')
-			{
-			  $filter = 'incident_active = 0';
+      // Verified
+			if ($status == 'v') {
+			  $filter = 'incident.incident_status = 1';
 			}
-			elseif ($status == 'v')
-			{
-			  $filter = 'incident_verified = 0';
-			}
-			elseif ($status == 't')
-      {
-          $filter = 'incident.incident_verified = 1';
+			// In triage (been verified)
+			elseif ($status == 't') {
+        $filter = 'incident.incident_status = 2';
       }
-      elseif ($status == 'f')
-      {
-          $filter = 'incident.incident_assigned = 1';
+      // Assigned / being fixed
+      elseif ($status == 'f') {
+        $filter = 'incident.incident_status = 3';
       }
-      elseif ($status == 'd')
-      {
-          $filter = 'incident.incident_disputed = 0';
+      // In dispute
+      elseif ($status == 'd') {
+        $filter = 'incident.incident_status = 4';
       }
-			else
-			{
-			$status = "0";
-			$filter = '1=1';
+      // Finished
+      elseif($status == 'e') {
+        $filter = 'incident.incident_status = 5';
+      }
+			else {
+			  $status = "0";
+  			$filter = '1=1';
 			}
 		}
-		else
-		{
+		else {
 			$status = "0";
 			$filter = "1=1";
 		}
@@ -128,77 +110,64 @@ class Reports_Controller extends Admin_simplegroup_Controller
 
 			$filter .= " AND (".$this->_get_searchstring($keyword_raw).")";
 		}
-		else
-		{
+		else {
 			$keyword_raw = "";
 		}
 
-
-
 		// Category ID
 		$category_ids=array();
-		if( isset($_GET['c']) AND ! empty($_GET['c']) )
-		{
+		if( isset($_GET['c']) AND ! empty($_GET['c']) ) {
 			$category_ids = explode(",", $_GET['c']); //get rid of that trailing ","
 		}
-		else
-		{
+		else {
 			$category_ids = array("0");
 		}
 		
 		// logical operator
 		$logical_operator = "or";
-		if( isset($_GET['lo']) AND ! empty($_GET['lo']) )
-		{
+		if( isset($_GET['lo']) AND ! empty($_GET['lo']) ) {
 			$logical_operator = $_GET['lo'];
 		}
 
 		$show_unapproved="3"; //1 show only approved, 2 show only unapproved, 3 show all
 		//figure out if we're showing unapproved stuff or what.
-		if (isset($_GET['u']) AND !empty($_GET['u']))
-		{
+		if (isset($_GET['u']) AND !empty($_GET['u'])) {
 		    $show_unapproved = (int) $_GET['u'];
 		}
 		$approved_text = "";
-		if($show_unapproved == 1)
-		{
+		if($show_unapproved == 1) {
 			$approved_text = "incident.incident_active = 1 ";
 		}
-		else if ($show_unapproved == 2)
-		{
+		else if ($show_unapproved == 2) {
 			$approved_text = "incident.incident_active = 0 ";
 		}
-		else if ($show_unapproved == 3)
-		{
+		else if ($show_unapproved == 3) {
 			$approved_text = " (incident.incident_active = 0 OR incident.incident_active = 1) ";
 		}
 		
 		// Start Date
-	    $start_date = (isset($_GET['s']) AND !empty($_GET['s'])) ? (int) $_GET['s'] : "0";
+	  $start_date = (isset($_GET['s']) AND !empty($_GET['s'])) ? (int) $_GET['s'] : "0";
 	
-	    // End Date
-	    $end_date = (isset($_GET['e']) AND !empty($_GET['e'])) ? (int) $_GET['e'] : "0";
+	  // End Date
+	  $end_date = (isset($_GET['e']) AND !empty($_GET['e'])) ? (int) $_GET['e'] : "0";
 		
 		$filter .= ($start_date) ? " AND incident.incident_date >= '" . date("Y-m-d H:i:s", $start_date) . "'" : "";
-	    $filter .= ($end_date) ? " AND incident.incident_date <= '" . date("Y-m-d H:i:s", $end_date) . "'" : "";
+	  $filter .= ($end_date) ? " AND incident.incident_date <= '" . date("Y-m-d H:i:s", $end_date) . "'" : "";
 		
 		
 		$location_where = "";
 		// Break apart location variables, if necessary
 		$southwest = array();
-		if (isset($_GET['sw']))
-		{
+		if (isset($_GET['sw'])) {
 			$southwest = explode(",",$_GET['sw']);
 		}
 
 		$northeast = array();
-		if (isset($_GET['ne']))
-		{
+		if (isset($_GET['ne'])) {
 			$northeast = explode(",",$_GET['ne']);
 		}
 
-		if ( count($southwest) == 2 AND count($northeast) == 2 )
-		{
+		if ( count($southwest) == 2 AND count($northeast) == 2 ) {
 			$lon_min = (float) $southwest[0];
 			$lon_max = (float) $northeast[0];
 			$lat_min = (float) $southwest[1];
@@ -218,74 +187,62 @@ class Reports_Controller extends Admin_simplegroup_Controller
 		
 		// Pagination
 		$pagination = new Pagination(array(
-				'directory' => 'simplegroups/pagination',
-				'style' => 'ajax_classic',
-				'query_string' => 'page',
-				'items_per_page' => (int) Kohana::config('settings.items_per_page_admin'),
-				'total_items' => $reports_count
-				));
+		  'directory' => 'simplegroups/pagination',
+		  'style' => 'ajax_classic',
+		  'query_string' => 'page',
+		  'items_per_page' => (int) Kohana::config('settings.items_per_page_admin'),
+		  'total_items' => $reports_count
+		));
 				
-
 		$incidents = groups::get_reports($category_ids,  $approved_text, $location_where. " AND ". $filter. " AND ". $group_where, 
 			$logical_operator, 
 			"incident.incident_date", "DESC",
-			(int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset );
+			(int) Kohana::config('settings.items_per_page_admin'), $pagination->sql_offset
+    );
 			
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Setup the Location information for each incident
 		$location_ids = array();
-		foreach ($incidents as $incident)
-		{
+		foreach ($incidents as $incident) {
 		    $location_ids[] = $incident->location_id;
 		}
 		//check if location_ids is not empty
-		if( count($location_ids ) > 0 ) 
-		{
-		    $locations_result = ORM::factory('location')->in('id',implode(',',$location_ids))->find_all();
-		    $locations = array();
-		    foreach ($locations_result as $loc)
-		    {
-			$locations[$loc->id] = $loc->location_name;
-		    }
+		if( count($location_ids ) > 0 )  {
+      $locations_result = ORM::factory('location')->in('id',implode(',',$location_ids))->find_all();
+      $locations = array();
+		  foreach ($locations_result as $loc) {
+  			$locations[$loc->id] = $loc->location_name;
+		  }
 		}
-		else
-		{
+		else {
 		    $locations = array();
 		}
 
-		
-		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//use this to make a mapping of simplegroup categories to reports	
 		$incidents_ids = array();
-		foreach($incidents as $incident)
-		{
-		$incidents_ids[] = $incident->id;
+		foreach($incidents as $incident) {
+  		$incidents_ids[] = $incident->id;
 		}
 		$category_mapping = array();
 		//make sure there are some messages
-		if(count($incidents_ids) > 0)
-		{
-		$incident_categories = ORM::factory('simplegroups_category')
+		if(count($incidents_ids) > 0) {
+		  $incident_categories = ORM::factory('simplegroups_category')
 					->select("simplegroups_category.*, simplegroups_incident_category.incident_id AS incident_id")
 					->join('simplegroups_incident_category', 'simplegroups_category.id', 'simplegroups_incident_category.simplegroups_category_id')
 					->in("simplegroups_incident_category.incident_id", implode(',', $incidents_ids))
 					->where('simplegroups_category.simplegroups_groups_id', $this->group->id)
 					->find_all();
 
-			foreach($incident_categories as $incident_category)
-			{
+			foreach($incident_categories as $incident_category) {
 				$category_mapping[$incident_category->incident_id][] = $incident_category;
 			}
 		}
 
-
-
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Gets a list of countries to better specify the location
 		$countries = array();
-		foreach (ORM::factory('country')->orderby('country')->find_all() as $country)
-		{
+		foreach (ORM::factory('country')->orderby('country')->find_all() as $country) {
 		    // Create a list of all categories
 		    $this_country = $country->country;
 		    if (strlen($this_country) > 35)
@@ -573,14 +530,15 @@ class Reports_Controller extends Admin_simplegroup_Controller
             'incident_ampm' => '',
             'latitude' => '',
             'longitude' => '',
-	    	'geometry' => array(),
+	    	    'geometry' => array(),
             'location_name' => '',
             'country_id' => '',
             'incident_category' => array(),
-	    	'incident_group_category' => array(),
+	    	    'incident_group_category' => array(),
             'incident_news' => array(),
             'incident_video' => array(),
             'incident_photo' => array(),
+            'incident_status' => array(),
             'person_first' => '',
             'person_last' => '',
             'person_email' => '',
@@ -613,6 +571,7 @@ class Reports_Controller extends Admin_simplegroup_Controller
         $form['incident_hour'] = date('h');
         $form['incident_minute'] = date('i');
         $form['incident_ampm'] = date('a');
+        $form['incident_status'] = $this->_get_incident_status($id);
         // initialize custom field array
         $form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
 		$number_of_message_sender = null;
@@ -664,71 +623,63 @@ class Reports_Controller extends Admin_simplegroup_Controller
         // Are we creating this report from SMS/Email/Twitter?
         // If so retrieve message
         if ( isset($_GET['mid']) && !empty($_GET['mid']) ) {
-
-            $message_id = $_GET['mid'];
-            $service_id = "";
-            $message = ORM::factory('message', $message_id);
+          $message_id = $_GET['mid'];
+          $service_id = "";
+          $message = ORM::factory('message', $message_id);
 	    
-	    
-	    //figure out the group number that sent the message
-	    $number_items = ORM::factory("simplegroups_groups_number")
-			->join("simplegroups_groups_message", "simplegroups_groups_message.number_id", "simplegroups_groups_numbers.id")
-			->where("simplegroups_groups_message.message_id", $message_id)
-			->find_all();
-		foreach($number_items as $number_item)
-		{
-			$number_of_message_sender = $number_item;
-		}
+	        //figure out the group number that sent the message
+	        $number_items = ORM::factory("simplegroups_groups_number")
+			      ->join("simplegroups_groups_message", "simplegroups_groups_message.number_id", "simplegroups_groups_numbers.id")
+			      ->where("simplegroups_groups_message.message_id", $message_id)
+			      ->find_all();
+		      foreach($number_items as $number_item) {
+      			$number_of_message_sender = $number_item;
+		      }
 
-            if ($message->loaded == true && $message->message_type == 1)
-            {
-                $service_id = $message->reporter->service_id;
+          if ($message->loaded == true && $message->message_type == 1) {
+            $service_id = $message->reporter->service_id;
 
-                // Has a report already been created for this Message?
-                if ($message->incident_id != 0) {
-                    // Redirect to report
-                    url::redirect('admin/simplegroups/reports/edit/'. $message->incident_id);
-                }
-
-                $this->template->content->show_messages = true;
-                $incident_description = $message->message;
-                if (!empty($message->message_detail))
-                {
-                    $incident_description .= "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
-                        . $message->message_detail;
-                }
-                $form['incident_description'] = $incident_description;
-                $form['incident_date'] = date('m/d/Y', strtotime($message->message_date));
-                $form['incident_hour'] = date('h', strtotime($message->message_date));
-                $form['incident_minute'] = date('i', strtotime($message->message_date));
-                $form['incident_ampm'] = date('a', strtotime($message->message_date));
-                $form['person_first'] = $message->reporter->reporter_first;
-                $form['person_last'] = $message->reporter->reporter_last;
-
-                // Does the sender of this message have a location?
-                if ($message->reporter->location->loaded)
-                {
-                    $form['latitude'] = $message->reporter->location->latitude;
-                    $form['longitude'] = $message->reporter->location->longitude;
-                    $form['location_name'] = $message->reporter->location->location_name;
-                }
-
-                // Retrieve Last 5 Messages From this account
-                $this->template->content->all_messages = ORM::factory('message')
-                    ->where('reporter_id', $message->reporter_id)
-                    ->orderby('message_date', 'desc')
-                    ->limit(5)
-                    ->find_all();
+            // Has a report already been created for this Message?
+            if ($message->incident_id != 0) {
+                // Redirect to report
+                url::redirect('admin/simplegroups/reports/edit/'. $message->incident_id);
             }
-            else
-            {
-                $message_id = "";
-                $this->template->content->show_messages = false;
+
+            $this->template->content->show_messages = true;
+            $incident_description = $message->message;
+            if (!empty($message->message_detail)) {
+                $incident_description .= "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
+                    . $message->message_detail;
             }
-        }
-        else
-        {
+            $form['incident_description'] = $incident_description;
+            $form['incident_date'] = date('m/d/Y', strtotime($message->message_date));
+            $form['incident_hour'] = date('h', strtotime($message->message_date));
+            $form['incident_minute'] = date('i', strtotime($message->message_date));
+            $form['incident_ampm'] = date('a', strtotime($message->message_date));
+            $form['person_first'] = $message->reporter->reporter_first;
+            $form['person_last'] = $message->reporter->reporter_last;
+
+            // Does the sender of this message have a location?
+            if ($message->reporter->location->loaded) {
+              $form['latitude'] = $message->reporter->location->latitude;
+              $form['longitude'] = $message->reporter->location->longitude;
+              $form['location_name'] = $message->reporter->location->location_name;
+            }
+
+            // Retrieve Last 5 Messages From this account
+            $this->template->content->all_messages = ORM::factory('message')
+                ->where('reporter_id', $message->reporter_id)
+                ->orderby('message_date', 'desc')
+                ->limit(5)
+                ->find_all();
+            }
+          else {
+            $message_id = "";
             $this->template->content->show_messages = false;
+          }
+        }
+        else {
+          $this->template->content->show_messages = false;
         }
 
         // Are we creating this report from a Newsfeed?
@@ -786,6 +737,7 @@ class Reports_Controller extends Admin_simplegroup_Controller
             $post->add_rules('message_id','numeric');
             $post->add_rules('incident_title','required', 'length[3,200]');
             $post->add_rules('incident_description','required');
+            $post->add_rules('incident_status','required');
             $post->add_rules('incident_date','required','date_mmddyyyy');
             $post->add_rules('incident_hour','required','between[1,12]');
             $post->add_rules('incident_minute','required','between[0,59]');
@@ -888,6 +840,7 @@ class Reports_Controller extends Admin_simplegroup_Controller
                 $incident->user_id = $_SESSION['auth_user']->id;
                 $incident->incident_title = $post->incident_title;
                 $incident->incident_description = $post->incident_description;
+                $incident->incident_status = $post->incident_status;
 
                 $incident_date=explode("/",$post->incident_date);
                 // where the $_POST['date'] is a value posted by form in mm/dd/yyyy format
@@ -1211,21 +1164,17 @@ class Reports_Controller extends Admin_simplegroup_Controller
 			->where(array("incident_id"=> $id, "simplegroups_groups_id"=>$this->group->id))
 			->count_all();
 
-		if($count == 0)
-		{
+		if($count == 0) {
 			url::redirect(url::site().'admin/simplegroups/reports');
 		}
-	    
-                // Retrieve Current Incident
-                $incident = ORM::factory('incident', $id);
-                if ($incident->loaded == true)
-                {
-                    // Retrieve Categories
-                    $incident_category = array();
-                    foreach($incident->incident_category as $category)
-                    {
-                        $incident_category[] = $category->category_id;
-                    }
+    // Retrieve Current Incident
+    $incident = ORM::factory('incident', $id);
+    if ($incident->loaded == true) {
+      // Retrieve Categories
+      $incident_category = array();
+      foreach($incident->incident_category as $category) {
+          $incident_category[] = $category->category_id;
+      }
 		    
 		    // Retrieve Group Categories
                     $incident_group_category = array();
@@ -1265,45 +1214,45 @@ class Reports_Controller extends Admin_simplegroup_Controller
 				FROM ".Kohana::config('database.default.table_prefix')."geometry 
 				WHERE incident_id=".$id;
 			$query = $db->query($sql);
-			foreach ( $query as $item )
-			{
+			foreach ( $query as $item ) {
 				$form['geometry'][] = $item;
 			}
 
-                    // Combine Everything
-                    $incident_arr = array
-                    (
-                        'location_id' => $incident->location->id,
-                        'form_id' => $incident->form_id,
-                        'locale' => $incident->locale,
-                        'incident_title' => $incident->incident_title,
-                        'incident_description' => $incident->incident_description,
-                        'incident_date' => date('m/d/Y', strtotime($incident->incident_date)),
-                        'incident_hour' => date('h', strtotime($incident->incident_date)),
-                        'incident_minute' => date('i', strtotime($incident->incident_date)),
-                        'incident_ampm' => date('a', strtotime($incident->incident_date)),
-                        'latitude' => $incident->location->latitude,
-                        'longitude' => $incident->location->longitude,
-                        'location_name' => $incident->location->location_name,
-                        'country_id' => $incident->location->country_id,
-                        'incident_category' => $incident_category,
-						'incident_group_category' => $incident_group_category,
-                        'incident_news' => $incident_news,
-                        'incident_video' => $incident_video,
-                        'incident_photo' => $incident_photo,
-                        'person_first' => $incident->incident_person->person_first,
-                        'person_last' => $incident->incident_person->person_last,
-                        'person_email' => $incident->incident_person->person_email,
-                        'custom_field' => $this->_get_custom_form_fields($id,$incident->form_id,true),
-                        'incident_active' => $incident->incident_active,
-                        'incident_verified' => $incident->incident_verified,
-                        //'incident_source' => $incident->incident_source,
-                        //'incident_information' => $incident->incident_information,
-						//'incident_zoom' => Kohana::config('settings.default_zoom')
-                    );
+      // Combine Everything
+      $incident_arr = array
+      (
+        'location_id' => $incident->location->id,
+        'form_id' => $incident->form_id,
+        'locale' => $incident->locale,
+        'incident_title' => $incident->incident_title,
+        'incident_description' => $incident->incident_description,
+        'incident_date' => date('m/d/Y', strtotime($incident->incident_date)),
+        'incident_hour' => date('h', strtotime($incident->incident_date)),
+        'incident_minute' => date('i', strtotime($incident->incident_date)),
+        'incident_ampm' => date('a', strtotime($incident->incident_date)),
+        'latitude' => $incident->location->latitude,
+        'longitude' => $incident->location->longitude,
+        'location_name' => $incident->location->location_name,
+        'country_id' => $incident->location->country_id,
+        'incident_category' => $incident_category,
+				'incident_group_category' => $incident_group_category,
+        'incident_news' => $incident_news,
+        'incident_video' => $incident_video,
+        'incident_photo' => $incident_photo,
+        'person_first' => $incident->incident_person->person_first,
+        'person_last' => $incident->incident_person->person_last,
+        'person_email' => $incident->incident_person->person_email,
+        'custom_field' => $this->_get_custom_form_fields($id,$incident->form_id,true),
+        'incident_active' => $incident->incident_active,
+        'incident_verified' => $incident->incident_verified,
+        'incident_status' => $incident->incident_status,
+        //'incident_source' => $incident->incident_source,
+        //'incident_information' => $incident->incident_information,
+        //'incident_zoom' => Kohana::config('settings.default_zoom')
+      );
 
-                    // Merge To Form Array For Display
-                    $form = arr::overwrite($form, $incident_arr);
+      // Merge To Form Array For Display
+      $form = arr::overwrite($form, $incident_arr);
                 }
                 else
                 {
@@ -1457,16 +1406,17 @@ class Reports_Controller extends Admin_simplegroup_Controller
     //XXX: This needs to be fixed, it's probably ok to return an empty iterable instead of "0"
     private function _get_thumbnails( $id )
     {
-        $incident = ORM::factory('incident', $id);
-
         if ( $id )
         {
             $incident = ORM::factory('incident', $id);
-
             return $incident;
-
         }
         return "0";
+    }
+    
+    private function _get_status($id) {
+      $incident = ORM::factory('incident', $id);
+      return $incident->status;
     }
 
     private function _get_categories()
@@ -1615,11 +1565,6 @@ class Reports_Controller extends Admin_simplegroup_Controller
     private function _get_custom_form_fields($incident_id = false, $form_id = 1, $data_only = false)
     {
         $fields_array = array();
-
-        if (!$form_id)
-        {
-            $form_id = 1;
-        }
         $custom_form = ORM::factory('form', $form_id)->orderby('field_position','asc');
         foreach ($custom_form->form_field as $custom_formfield)
         {

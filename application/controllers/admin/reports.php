@@ -48,22 +48,21 @@ class Reports_Controller extends Admin_Controller {
 		{
 			$status = strtolower($_GET['status']);
 
-			if ($status == 'a')
+			if ($status == 'v')
 			{
-				array_push($params, 'i.incident_active = 0');
-			}
-			elseif ($status == 'v')
-			{
-				array_push($params, 'i.incident_verified = 0');
+				array_push($params, 'i.incident_status = 0');
 			}
 			elseif($status == 't') {
-			  array_push($params, 'i.incident_verified = 1');
+			  array_push($params, 'i.incident_status = 2');
 			}
 			elseif($status == 'f') {
-			  array_push($params, 'i.incident_assigned = 1 AND i.incident_verified = 1');
+			  array_push($params, 'i.incident_status = 3');
 			}
 			elseif($status == 'd') {
-			  array_push($params, 'i.incident_disputed = 1');
+			  array_push($params, 'i.incident_status = 4');
+			}
+			elseif($status == 'e') {
+			  array_push($params, 'i.incident_status = 5');
 			}
 			else
 			{
@@ -335,6 +334,7 @@ class Reports_Controller extends Admin_Controller {
 			'incident_hour' => '',
 			'incident_minute' => '',
 			'incident_ampm' => '',
+			'incident_status' => '',
 			'latitude' => '',
 			'longitude' => '',
 			'geometry' => array(),
@@ -721,6 +721,7 @@ class Reports_Controller extends Admin_Controller {
 						'incident_hour' => date('h', strtotime($incident->incident_date)),
 						'incident_minute' => date('i', strtotime($incident->incident_date)),
 						'incident_ampm' => date('a', strtotime($incident->incident_date)),
+						'incident_status' => $incident->incident_status,
 						'latitude' => $incident->location->latitude,
 						'longitude' => $incident->location->longitude,
 						'location_name' => $incident->location->location_name,

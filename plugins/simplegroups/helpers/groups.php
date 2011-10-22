@@ -28,7 +28,8 @@ class groups_Core {
 	{
 		//first get the group in question and see if they've specified a site
 		$group = ORM::factory("simplegroups_groups", $group_id);
-		Incident_Model::set_assigned($incident_id, 1);
+		// Set to assigned
+		Incident_Model::set_status($incident_id, 3);
 		if($group->own_instance == null || strlen($group->own_instance) < 4)
 		{
 			return; // they don't have an instance

@@ -3,11 +3,17 @@ function forwardMessage<?php echo $message_id; ?>()
 {
 	$("#forwarded_<?php echo $message_id; ?>").fadeIn("slow");
 	var groupId = $("#input_forwardto_<?php echo $message_id; ?>").val();
-	$.get("<?php echo url::site()."admin/simplegroups/forwardto/index/".$message_id."/".$item_type."/"; ?>" + groupId,
+	<?php if(isset($_GET['status'])) $status = $_GET['status']; else $status = '' ?>
+	$.get("<?php echo url::site()."admin/simplegroups/forwardto/index/".$message_id."/".$item_type."/"; ?>" + groupId + "/<?php echo $status ?>",
 		function(data) {
 			var forwardSpan = $("#msg_fwrd_to_<?php echo $message_id; ?>");
-			forwardSpan.html(data);
-			$("#forwarded_<?php echo $message_id; ?>").fadeOut("slow");
+			if(data == "") {
+			  forwardSpan.parents('tr').empty();
+		  }
+		  else {
+			  forwardSpan.html(data);
+			  $("#forwarded_<?php echo $message_id; ?>").fadeOut("slow");
+      }
 		});
 	return false;
 }

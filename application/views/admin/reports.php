@@ -22,23 +22,17 @@
 					<!-- tabset -->
 					<ul class="tabset">
 						<li>
-							<a href="?status=0" <?php if (!in_array($status, array('a', 'v', 't', 'f', 'd'))) echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
+							<a href="?status=0" <?php if (!in_array($status, array('v', 't', 'f', 'd', 'e'))) echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
 						</li>
-						<li><a href="?status=a" <?php if ($status == 'a') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_approval');?></a></li>
 						<li><a href="?status=v" <?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
 						<li><a href="?status=t" <?php if ($status == 't') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_triage');?></a></li>
 						<li><a href="?status=f" <?php if ($status == 'f') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_fix');?></a></li>
 						<li><a href="?status=d" <?php if ($status == 'd') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.dispute_resolution');?></a></li>
+						<li><a href="?status=e" <?php if ($status == 'e') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.finished');?></a></li>
 					</ul>
 					<!-- tab -->
 					<div class="tab">
 						<ul>
-							<li><a href="#" onclick="reportAction('a','<?php echo strtoupper(Kohana::lang('ui_main.approve')); ?>', '');">
-								<?php echo Kohana::lang('ui_main.approve');?></a>
-							</li>
-							<li><a href="#" onclick="reportAction('u','<?php echo strtoupper(Kohana::lang('ui_main.disapprove')); ?>', '');">
-								<?php echo Kohana::lang('ui_main.disapprove');?></a>
-							</li>
 							<li><a href="#" onclick="reportAction('v','<?php echo strtoupper(Kohana::lang('ui_admin.verify_unverify')); ?>', '');">
 								<?php echo Kohana::lang('ui_admin.verify_unverify');?></a>
 							</li>
@@ -233,14 +227,7 @@
 										<td class="col-3"><?php echo $incident_date; ?></td>
 										<td class="col-4">
 											<ul>
-												<li class="none-separator">
-													<?php if ($incident_approved) {?>
-													<a href="#" class="status_yes" onclick="reportAction('u','UNAPPROVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.approve');?></a>
-													<?php } else {?>
-													<a href="#" onclick="reportAction('a','APPROVE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.approve');?></a>
-													<?php } ?>	
-												</li>
-												<li><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
+												<li class="none-separator"><a href="#"<?php if ($incident_verified) echo " class=\"status_yes\"" ?> onclick="reportAction('v','VERIFY', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.verify');?></a></li>
 												<li><a href="#" class="del" onclick="reportAction('d','DELETE', '<?php echo $incident_id; ?>');"><?php echo Kohana::lang('ui_main.delete');?></a></li>
 											</ul>
 										</td>

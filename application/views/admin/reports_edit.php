@@ -96,6 +96,14 @@
 								<div id="form_loader" style="float:left;"></div>
 							</div>
 							<div class="row">
+							  <h4>Status</h4>
+							  <span class="sel-holder">
+							    <?php $selection = array('Pending', 'Approved/Verified', 'In triage', 'Awaiting repair', 'Disputed', 'Finished'); ?>
+									<?php print form::dropdown('form_id', $selection, $form['incident_status'],
+										' onchange="changeStatus(this.options[this.selectedIndex].value, \''.$id.'\')"') ?>
+								</span>
+							</div>
+							<div class="row">
 								<h4><?php echo Kohana::lang('ui_main.title');?></h4>
 								<?php print form::input('incident_title', $form['incident_title'], ' class="text title"'); ?>
 							</div>

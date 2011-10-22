@@ -528,11 +528,17 @@ class Incident_Model extends ORM {
 	 * @param int $val Set to 1 or 0 for verified or not verified
 	 * @return bool
 	 */
-	public static function set_assigned($incident_id, $val)
+	public static function set_status($incident_id, $val)
 	{
 		$incident = ORM::factory('incident', $incident_id);
-		$incident->incident_assigned = $val;
+		$incident->incident_status = $val;
 		return $incident->save();
+	}
+	
+	public static function get_status($incident_id)
+	{
+		$incident = ORM::factory('incident', $incident_id);
+		return $incident->incident_status;
 	}
 
 	/**

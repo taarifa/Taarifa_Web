@@ -322,6 +322,13 @@
 			$("#location_find").hint();
 		});
 		
+/*		function changeStatus(form_id, incident_id) {
+		  var answer = confirm('Are you sure you want to change the status of this form?');
+		  if(answer) {
+		    console.log(form_id, incident_id);
+		  }
+		} */
+		
 		function formSwitch(form_id, incident_id)
 		{
 			var answer = confirm('Are You Sure You Want To SWITCH Forms?');

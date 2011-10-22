@@ -860,6 +860,18 @@
 			feature.layer.drawFeature(feature);
 		}
 		
+		function changeStatus(form_id, incident_id) {
+		  var answer = confirm('Are you sure you want to change the status of this form?');
+		  if(answer) {
+		    $.post("<?php echo url::base() . 'admin/simplegroups/reports/change_status' ?>", { form_id: form_id, incident_id: incident_id },
+					function(data){
+						if (data.status == 'success'){
+							
+						}
+				  }, "json");
+		  }
+		}
+		
 		// Reverse GeoCoder
 		function reverseGeocode(latitude, longitude) {		
 			var latlng = new google.maps.LatLng(latitude, longitude);

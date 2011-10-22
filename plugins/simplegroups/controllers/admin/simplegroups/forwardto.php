@@ -22,7 +22,7 @@ class Forwardto_Controller extends Admin_Controller
 
 
 
-	function index($id, $item_type, $group_id)
+	function index($id, $item_type, $group_id, $page_type)
 	{
 		//if the person is a group user don't show them this:
 		$user = new User_Model($_SESSION['auth_user']->id);
@@ -122,7 +122,8 @@ class Forwardto_Controller extends Admin_Controller
 	  }
 	  if($assigned_groups_text != "")
 	  {
-		  echo " Assigned to group(s): ". $assigned_groups_text;
+	    if($page_type == 't') echo "";
+		  else echo " Assigned to group(s): ". $assigned_groups_text;
 	  }
 
 
