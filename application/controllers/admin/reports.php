@@ -312,6 +312,7 @@ class Reports_Controller extends Admin_Controller {
 	public function edit($id = FALSE, $saved = FALSE)
 	{
 		$db = new Database();
+		$wasmessage = FALSE;
 		
 		// If user doesn't have access, redirect to dashboard
 		if ( ! admin::permissions($this->user, "reports_edit"))
@@ -493,6 +494,13 @@ class Reports_Controller extends Admin_Controller {
 					->orderby('message_date', 'desc')
 					->limit(5)
 					->find_all();
+					
+				$wasmessage = TRUE;
+				
+				//send a confirmation message that we got it
+				//should really do this later, but no time and this is easier :)
+				//sms_Core::add(123456789,"Your report has been received",$message->message_from);
+				sms_Core::add(123456789,"Your report has been received","447763806809");
 			}
 			else
 			{
