@@ -46,15 +46,12 @@ class Reports_Controller extends Admin_Controller {
 		// To 
 		$params = array('all_reports' => TRUE);
 		
-		$status = "0";
-		
-		if ( !empty($_GET['status']))
+		if ( isset($_GET['status']))
 		{
 			$status = strtolower($_GET['status']);
 
-			if ($status == 'v')
-			{
-				array_push($params, 'i.incident_status = 0');
+			if ($status == 'v') {
+				array_push($params, 'i.incident_verified = 0');
 			}
 			elseif($status == 't') {
 			  array_push($params, 'i.incident_verified = 1 AND i.incident_status < 3');
@@ -68,11 +65,12 @@ class Reports_Controller extends Admin_Controller {
 			elseif($status == 'e') {
 			  array_push($params, 'i.incident_status = 5');
 			}
-			else
-			{
-				$status = "0";
+			else {
+				$status = 'all';
+				array_push($params, 'i.incident_status <> 5');
 			}
 		}
+		else $status = 'all';
 		
 		// Get Search Keywords (If Any)
 		if (isset($_GET['k']))
@@ -376,7 +374,7 @@ class Reports_Controller extends Admin_Controller {
 		$form['country_id'] = Kohana::config('settings.default_country');
 		
 		// initialize custom field array
-        $form['custom_field'] = customforms::get_custom_form_fields($id,'',true);
+    $form['custom_field'] = customforms::get_custom_form_fields($id,'',true);
 
 		// Locale (Language) Array
 		$this->template->content->locale_array = Kohana::config('locale.all_languages');
@@ -905,7 +903,7 @@ class Reports_Controller extends Admin_Controller {
 			if ($post->validate())
 			{
 				// Add Filters
-				$filter = " ( 1=1";
+				$filter = " ( ";
 				
 				// Report Type Filter
 				foreach($post->data_point as $item)
@@ -1335,10 +1333,12 @@ class Reports_Controller extends Admin_Controller {
 			$post->add_rules('status', 'required');
 			
 			if($post->validate()) {
-			  $incident = ORM::factory('incident', $_POST['incident_id']);
+			  $incident = ORM::factory('incident', $post['incident_id']);
 			  // Only if the incident exists
 			  if($incident->id) {
-			    $incident->incident_status = $_POST['status'];
+			    $incident->incident_status = $post['status'];
+			    $incident->incident_verified = ($post['status'] > 1);
+			    $incident->incident_active = !($post['status'] == 5);
 			    $incident->save();
 			  }
 			}
@@ -1611,7 +1611,7 @@ class Reports_Controller extends Admin_Controller {
 		}
 		
 		// Return
-		return (!empty($where_string)) ? $where_string :  "1=1";
+		return $where_string;
 	}
 
 	private function _csv_text($text)

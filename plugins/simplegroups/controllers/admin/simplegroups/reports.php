@@ -493,7 +493,7 @@ class Reports_Controller extends Admin_simplegroup_Controller {
     function edit( $id = false, $saved = false ) {
     	$db = new Database();
 	
-        //$this->template->content = new View('admin/reports_edit');
+      $this->template->content = new View('admin/reports_edit');
 	    $this->template->content = View::factory('simplegroups/reports_edit');	
       $this->template->content->title = Kohana::lang('ui_admin.create_report');
 
@@ -531,56 +531,53 @@ class Reports_Controller extends Admin_simplegroup_Controller {
   	    'incident_zoom' => ''
       );
 
-        //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
-        $errors = $form;
-        $form_error = FALSE;
-        $form_saved = $saved;
+      //  copy the form as errors, so the errors will be stored with keys corresponding to the form field names
+      $errors = $form;
+      $form_error = FALSE;
+      $form_saved = $saved;
 
-        // Initialize Default Values
-        $form['locale'] = Kohana::config('locale.language');
-        //$form['latitude'] = Kohana::config('settings.default_lat');
-        //$form['longitude'] = Kohana::config('settings.default_lon');
-        $form['country_id'] = Kohana::config('settings.default_country');
-        $form['incident_date'] = date("m/d/Y",time());
-        $form['incident_hour'] = date('h');
-        $form['incident_minute'] = date('i');
-        $form['incident_ampm'] = date('a');
-        $form['incident_status'] = $this->_get_status($id);
-        $form['phone_number'] = $this->_get_phone_number($id);
-        // initialize custom field array
-        $form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
-		$number_of_message_sender = null;
+      // Initialize Default Values
+      $form['locale'] = Kohana::config('locale.language');
+      //$form['latitude'] = Kohana::config('settings.default_lat');
+      //$form['longitude'] = Kohana::config('settings.default_lon');
+      $form['country_id'] = Kohana::config('settings.default_country');
+      $form['incident_date'] = date("m/d/Y",time());
+      $form['incident_hour'] = date('h');
+      $form['incident_minute'] = date('i');
+      $form['incident_ampm'] = date('a');
+      
+      // initialize custom field array
+      $form['custom_field'] = $this->_get_custom_form_fields($id,'',true);
+		  $number_of_message_sender = null;
 
-        // Locale (Language) Array
-        $this->template->content->locale_array = Kohana::config('locale.all_languages');
+      // Locale (Language) Array
+      $this->template->content->locale_array = Kohana::config('locale.all_languages');
 
-        // Create Categories
-        $this->template->content->categories = $this->_get_categories();
-		$this->template->content->group_categories = $this->_get_group_categories();
-        $this->template->content->new_categories_form = $this->_new_categories_form_arr();
-	
-		$this->template->content->group_name = $this->group->name;
+      // Create Categories
+      $this->template->content->categories = $this->_get_categories();
+		  $this->template->content->group_categories = $this->_get_group_categories();
+      $this->template->content->new_categories_form = $this->_new_categories_form_arr();
+	    $this->template->content->group_name = $this->group->name;
 
-        // Time formatting
-        $this->template->content->hour_array = $this->_hour_array();
-        $this->template->content->minute_array = $this->_minute_array();
-        $this->template->content->ampm_array = $this->_ampm_array();
-	
-		$this->template->content->stroke_width_array = $this->_stroke_width_array();
+      // Time formatting
+      $this->template->content->hour_array = $this->_hour_array();
+      $this->template->content->minute_array = $this->_minute_array();
+      $this->template->content->ampm_array = $this->_ampm_array();
+	    
+	    $this->template->content->stroke_width_array = $this->_stroke_width_array();
 
-        // Get Countries
-        $countries = array();
-        foreach (ORM::factory('country')->orderby('country')->find_all() as $country)
-        {
-            // Create a list of all categories
-            $this_country = $country->country;
-            if (strlen($this_country) > 35)
-            {
-                $this_country = substr($this_country, 0, 35) . "...";
-            }
-            $countries[$country->id] = $this_country;
-        }
-        $this->template->content->countries = $countries;
+      // Get Countries
+      $countries = array();
+      foreach (ORM::factory('country')->orderby('country')->find_all() as $country) {
+          // Create a list of all categories
+          $this_country = $country->country;
+          if (strlen($this_country) > 35)
+          {
+              $this_country = substr($this_country, 0, 35) . "...";
+          }
+          $countries[$country->id] = $this_country;
+      }
+      $this->template->content->countries = $countries;
 
         //GET custom forms
         $forms = array();
@@ -1391,7 +1388,7 @@ class Reports_Controller extends Admin_simplegroup_Controller {
     
     private function _get_status($id) {
       $incident = ORM::factory('incident', $id);
-      return $incident->status;
+      return $incident->incident_status;
     }
 
     private function _get_categories()
@@ -1741,10 +1738,10 @@ class Reports_Controller extends Admin_simplegroup_Controller {
 	$permissions = groups::get_permissions_for_user($this->user->id);
 	if(!$permissions["edit_group_settings"] )
 	{
-		url::redirect(url::site().'admin/simplegroups/dashboard');
+		url::redirect(url::site().'admin/dashboard');
 	}
 
-        $this->template->content = new View('simplegroups/reports_download');
+        $this->template->content = new View('reports_download');
         $this->template->content->title = Kohana::lang('ui_admin.download_reports');
 
         $form = array(

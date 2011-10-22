@@ -22,7 +22,7 @@
 					<!-- tabset -->
 					<ul class="tabset">
 						<li>
-							<a href="?status=0" <?php if (!in_array($status, array('v', 't', 'f', 'd', 'e'))) echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
+							<a href="?status=all" <?php if (!in_array($status, array('v', 't', 'f', 'd', 'e'))) echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.show_all');?></a>
 						</li>
 						<li><a href="?status=v" <?php if ($status == 'v') echo "class=\"active\""; ?>><?php echo Kohana::lang('ui_main.awaiting_verification');?></a></li>
 						<li><a href="?status=t" <?php if ($status == 't') echo "class=\"active\""; ?>><?php echo Kohana::lang('status.awaiting_triage');?></a></li>

@@ -264,7 +264,7 @@ class Incident_Model extends ORM {
 		}
 		else
 		{
-			$sql .= 'WHERE 1=1 ';
+//			$sql .= 'WHERE 1=1 ';
 		}
 
 		// Group and order the records
@@ -370,7 +370,6 @@ class Incident_Model extends ORM {
 		if (array_key_exists('all_reports', $where) AND $where['all_reports'] == TRUE)
 		{
 			unset ($where['all_reports']);
-			$sql .= 'WHERE 1=1 ';
 		}
 		else
 		{
