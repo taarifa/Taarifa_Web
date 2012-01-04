@@ -1,8 +1,8 @@
 Ushahidi Platform
 =================
-The Ushahidi Platform is an open source web application for information collection, vizualisation and interactive 
+The Taarifa Platform is an open source web application for information collection, vizualisation and interactive 
 mapping. It allows people to collect and share their own stories using various mediums such
-as SMS, Web Forms, Email or Twitter. For more information about the platform and use cases (case studies) visit: http://www.ushahidi.com
+as SMS, Web Forms, Email or Twitter, placing these reports into a workflow. For more information about the platform and use cases (case studies) visit: http://www.taarifa.com
 
 
 System Requirements
@@ -21,7 +21,7 @@ To install the platform on your computer/server, the target system must meet the
 
 Required Extensions
 -------------------
-The follwing is a list of PHP extensions that must be installed on your server in order for Ushahidi to run properly:
+The follwing is a list of PHP extensions that must be installed on your server in order for Taarife to run properly:
 
 * PCRE (http://php.net/pcre) must be compiled with –enable-utf8 and –enable-unicode-properties for UTF-8 functions to work properly.
 * iconv (http://php.net/iconv) is required for UTF-8 transliteration.
@@ -36,9 +36,9 @@ The follwing is a list of PHP extensions that must be installed on your server i
 
 Optional Server Requirements
 ----------------------------
-* To use Ushahidi's "Clean URLS" feature on an Apache Web Server, you will need the mod_rewrite module
+* To use Taarifa's "Clean URLS" feature on an Apache Web Server, you will need the mod_rewrite module
   and the ability to use local .htaccess files. To check if local .htaccess files are allowed, verify that the 
-  "AllowOverride" directive in your Apache config (for the web server directory in which you have installed Ushahidi) 
+  "AllowOverride" directive in your Apache config (for the web server directory in which you have installed Taarifa) 
   has been set to "All" i.e.:
 
         <Directory [your-document-root-directory]>
@@ -52,17 +52,15 @@ Optional Server Requirements
 
 Installation
 ------------
-* ####Download and extract Ushahidi
-    You can obtain the official release of the software from [the download site](http://download.ushahidi.com). 
-    Alternatively, you can obtain the release running the latest version  of the from [GitHub](https://github.com/ushahidi/Ushahidi_Web/archives/master) - the files are available in .zip and .tar.gz
+* ####Download and extract Taarifa
     
     To unzip/extract the archive on a typical Unix/Linux command line:
     
-        tar -xvf Ushahidi_Web-xxxx.tar.gz
+        tar -xvf Taarifa_Web-xxxx.tar.gz
     
     or in the case of a zip file:
 
-        unzip Ushahidi_Web-xxxx.zip
+        unzip Taarifa_Web-xxxx.zip
     
     This will create a new directory Ushahidi_Web-xxxx containing all the Ushahidi platform files and directories - Move the contents of this directory
     into a directory within your webserver's document root or your public HTML directory.
