@@ -7,3 +7,7 @@ application/cache/*
 media/uploads/*
 application/config/database.php
 tests/phpunit/phpunit.xml
+
+.htaccess
+
+application/config/config.php
