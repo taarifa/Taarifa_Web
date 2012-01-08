@@ -355,6 +355,7 @@ CREATE TABLE IF NOT EXISTS `incident` (
     `incident_datemodify` datetime default NULL,                                    
     `incident_alert_status` TINYINT NOT NULL DEFAULT '0' COMMENT '0 - Not Tagged for Sending, 1 - Tagged for Sending, 2 - Alerts Have Been Sent',
     `incident_identifier` varchar(255) default NULL,                                     
+    `incident_status` int,
 	`incident_zoom` tinyint NULL DEFAULT NULL,
   PRIMARY KEY  (`id`),
   KEY `location_id` (`location_id`),
@@ -1460,4 +1461,4 @@ ALTER TABLE `settings` ADD `allow_alerts` tinyint(4) NOT NULL DEFAULT '0';
 * 
 */
 UPDATE `settings` SET `ushahidi_version` = '2.1' WHERE `id`=1 LIMIT 1;
-UPDATE `settings` SET `db_version` = '68' WHERE `id`=1 LIMIT 1;
+UPDATE `settings` SET `db_version` = '69' WHERE `id`=1 LIMIT 1;
