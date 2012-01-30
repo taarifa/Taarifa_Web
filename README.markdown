@@ -2,7 +2,7 @@ Ushahidi Platform
 =================
 The Taarifa Platform is an open source web application for information collection, vizualisation and interactive 
 mapping. It allows people to collect and share their own stories using various mediums such
-as SMS, Web Forms, Email or Twitter, placing these reports into a workflow. For more information about the platform and use cases (case studies) visit: http://www.taarifa.com
+as SMS, Web Forms, Email or Twitter, placing these reports into a workflow. For more information about the platform and use cases (case studies) visit: http://www.taarifa.org
 
 
 System Requirements
@@ -97,7 +97,7 @@ Installation
     Again, you will be prompted for the 'username' database password. At the MySQL prompt, enter the following command:
     
         GRANT SELECT, INSERT, DELETE, UPDATE, CREATE, DROP, ALTER, INDEX on 'databasename'.* 
-        TO 'username'@'localhost' IDENFIFIED BY 'password';
+        TO 'username'@'localhost' IDENTIFIED BY 'password';
     
     Where:
     - 'databasename' is the name of your database
