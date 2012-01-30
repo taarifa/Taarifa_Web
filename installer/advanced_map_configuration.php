@@ -55,7 +55,7 @@
 									<option value="4" url="http://code.google.com/apis/maps/signup.html">Google</option>
 								</select>								 
 							</td>
-							<td>Taaria works equally well with any of these four mapping providers: OpenStreetMap, Bing, Yahoo or Google.  Choose the one that has the most detail in your area.</td>
+							<td>Taarifa works equally well with any of these four mapping providers: OpenStreetMap, Bing, Yahoo or Google.  Choose the one that has the most detail in your area.</td>
 						</tr>
 						<tr>
 							<th scope="row"><label id="map-provider-label" for="map_provider_api_key"><span>Google</span> API Key</label></th>
