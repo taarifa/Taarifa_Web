@@ -1,4 +1,4 @@
-Ushahidi Platform
+Taarifa Platform
 =================
 The Taarifa Platform is an open source web application for information collection, vizualisation and interactive 
 mapping. It allows people to collect and share their own stories using various mediums such
