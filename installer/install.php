@@ -200,8 +200,8 @@ class Install
 	public function _map_info($map_provider, $map_api_key, $table_prefix)
 	{
 		global $form;
-		//check for empty fields
-		if(!$map_api_key || strlen($map_api_key = trim($map_api_key)) == 0 ){
+		//check for API key only if map provider is google
+		if($map_provider == 4 && (!$map_api_key || strlen($map_api_key = trim($map_api_key)) == 0)){
 			$form->set_error("map_provider_api_key", "Please make sure to " .
 					"enter an<strong> api key</strong> for your map provider.");
 		} else {
