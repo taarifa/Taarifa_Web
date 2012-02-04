@@ -128,7 +128,7 @@
 								<a href="<?php echo url::site() . 'admin/reports' ?>" class="reports"><?php echo Kohana::lang('ui_main.reports');?></a>
 								<strong><?php echo number_format($reports_total); ?></strong>
 								<ul>
-									<li><a href="<?php echo url::site() . 'admin/reports?status=a' ?>"><?php echo Kohana::lang('ui_main.not_approved');?></a><strong>(<?php echo $reports_unapproved; ?>)</strong></li>
+									<li><a href="<?php echo url::site() . 'admin/reports?status=t' ?>"><?php echo Kohana::lang('ui_main.awaiting_triage');?></a><strong>(<?php echo $reports_unapproved; ?>)</strong></li>
 									
 								</ul>
 							</li>
