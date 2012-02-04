@@ -42,34 +42,34 @@ class Reports_Controller extends Admin_Controller {
 		$this->template->content->title = Kohana::lang('ui_admin.reports');
 		
 		// To 
-		$params = array('all_resports' => TRUE); //array('all_reports' => TRUE);
-		
-		if ( isset($_GET['status']))
-		{
-			$status = strtolower($_GET['status']);
+		$params = array('all_reports' => TRUE);
 
-			if ($status == 'v') {
-				array_push($params, 'i.incident_verified = 0');
-			}
-			elseif($status == 't') {
-			  array_push($params, 'i.incident_verified = 1 AND i.incident_status < 3');
-			}
-			elseif($status == 'f') {
-			  array_push($params, 'i.incident_status = 3');
-			}
-			elseif($status == 'd') {
-			  array_push($params, 'i.incident_status = 4');
-			}
-			elseif($status == 'e') {
-  			$params = array('all_reports' => TRUE);
-			  array_push($params, 'i.incident_status = 5');
-			}
-			else {
-				$status = 'all';
-				array_push($params, 'i.incident_status <> 5');
-			}
-		}
-		else $status = 'all';
+		if (isset($_GET['status']))
+		{
+            $status = strtolower($_GET['status']);
+            switch ($status) {
+              case 'v':
+                array_push($params, 'i.incident_verified = 0');
+                break;
+              case 't':
+                array_push($params, 'i.incident_verified = 1 AND i.incident_status < 3');
+                break;
+              case 'f':
+                array_push($params, 'i.incident_status = 3');
+                break;
+              case 'd':
+                array_push($params, 'i.incident_status = 4');
+                break;
+              case 'e':
+                array_push($params, 'i.incident_status = 5');
+                break;
+              case 'all':
+                //$status = 'all';
+                //array_push($params, 'i.incident_status <> 5');
+                break;
+            }
+		} 
+        else $status = 'all';
 		
 		// Get Search Keywords (If Any)
 		if (isset($_GET['k']))
