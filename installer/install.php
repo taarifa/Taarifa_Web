@@ -201,7 +201,7 @@ class Install
 	{
 		global $form;
 		//check for API key only if map provider is google
-		if($map_provider == 4 && (!$map_api_key || strlen($map_api_key = trim($map_api_key)) == 0)){
+		if($map_provider != '4' && (!$map_api_key || strlen($map_api_key = trim($map_api_key)) == 0)){
 			$form->set_error("map_provider_api_key", "Please make sure to " .
 					"enter an<strong> api key</strong> for your map provider.");
 		} else {

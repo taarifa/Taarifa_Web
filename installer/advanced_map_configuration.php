@@ -49,10 +49,10 @@
 							<th scope="row"><label for="select_map_provider">Map Provider</label></th>
 							<td>
 								<select id="select_map_provider" name="select_map_provider">
-									<option value="1" url="http://www.openstreetmap.org/user/new" selected="selected">OpenStreetMap</option>
+									<option value="1" url="http://code.google.com/apis/maps/signup.html">Google</option>
 									<option value="2" url="https://www.bingmapsportal.com/">Bing</option>
 									<option value="3" url="http://developer.yahoo.com/maps/">Yahoo</option>
-									<option value="4" url="http://code.google.com/apis/maps/signup.html">Google</option>
+									<option value="4" url="http://www.openstreetmap.org/user/new" selected="selected">OpenStreetMap</option>
 								</select>								 
 							</td>
 							<td>Taaria works equally well with any of these four mapping providers: OpenStreetMap, Bing, Yahoo or Google.  Choose the one that has the most detail in your area.</td>
