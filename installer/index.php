@@ -23,19 +23,6 @@
 		<span class="btn-box-content">Simple and fast.  All you need is your website's root directory and your database information.  Choose this option if you want to get up and running quickly, and you can always configure everything else later.</span>
 		<span class="last btn-action">Proceed with basic &rarr;</span>
 	</a>
-	<a href="advanced_summary.php" class="two-col-box tc-right btn-box">
-		<span class="btn-box-title">ADVANCED INSTALLATION</span>
-		<span class="btn-box-content">Get all the basic settings completed through this 5-step process.  This includes server, map, site name and contact details.</span>
-		<span class="last btn-action">Proceed with advanced &rarr;</span><br /><br />
-	</a>
-	
-	<!--Generic Box
-	<div class="two-col-box tc-right">
-		<h2>Title</h2>
-		<p></p>
-		<p class="last"><a href="#" class="btn">Proceed &rarr;</a></p>
-	</div>-->    
-
         	
 	</div>
 
