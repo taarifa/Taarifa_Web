@@ -42,7 +42,7 @@ class Reports_Controller extends Admin_Controller {
 		$this->template->content->title = Kohana::lang('ui_admin.reports');
 		
 		// To 
-		$params = array(); //array('all_reports' => TRUE);
+		$params = array('all_resports' => TRUE); //array('all_reports' => TRUE);
 		
 		if ( isset($_GET['status']))
 		{
