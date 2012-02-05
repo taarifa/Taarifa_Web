@@ -454,6 +454,7 @@ div.slider-holder {
     margin-top:15px;
     width:554px;
     padding-left: 11px;
+    padding-right: 11px;
 }
 
 div.slider-holder label{
@@ -2355,4 +2356,49 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     background-color:#E9E9E9;
     padding:5px;
     margin:0px 5px;
+}
+
+/* Change CSS for  the mobile view */
+ @media only screen and (max-width: 480px) {
+  
+  /* Change wrapper width from  fixed 960px to auto */
+  div.rapidxwpr {width: auto;}
+  
+  /* Change width of content elements from  fixed width to auto.*/
+  #map, #mapStatus, div.slider-holder, div.graph-holder, #reports-box, #filters-box, .report_left, .report_right, .report_optional, .report_map {
+    width: auto;
+  }
+  
+  /* Stop floating of certain layout containers */
+  #reports-box, #filters-box, .report_left  {float: none;}
+
+  /* Remove Header */
+  div#header {display: none;}
+  
+  /* Remove right content col from front page */
+  div#right {display: none;}
+
+  /* Remove stuff from front page */
+  div#mapStatus, .filters, div.slider-holder, #graph  {display: none;}
+  
+  /* Reduce blocks on the bottom of the front page */
+  .content-blocks h5 span {display: none;}
+  /* Remove official news */
+  #block-news {display: none;}
+  #block-reports {width: 100% !important;}
+  
+  /* Remove footer links */
+  .feedback_title {display: none;}
+  
+  /* Adjust margins */
+  div#main .withright div#content {
+    margin: 0;
+  }
+  #filters-box, .report_right  {margin: 20px 0 0 0;}
+  
+  /* adjust some  text sizes */
+  .time-period {}
+  
+  /* Adjust form input elements */
+  .long {width: 95%;}
 }
