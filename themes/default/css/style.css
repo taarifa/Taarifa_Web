@@ -454,6 +454,7 @@ div.slider-holder {
     margin-top:15px;
     width:554px;
     padding-left: 11px;
+    padding-right: 11px;
 }
 
 div.slider-holder label{
@@ -2357,40 +2358,44 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     margin:0px 5px;
 }
 
-/* Settings for a mobile version */
-@media only screen and (max-width: 480px) {
-  /* wrapper setup */
-  div.rapidxwpr{
-      margin: 10px;
-      width: auto;
+/* Change CSS for  the mobile view */
+ @media only screen and (max-width: 480px) {
+  
+  /* Change wrapper width from  fixed 960px to auto */
+  div.rapidxwpr {width: auto;}
+  
+  /* Change width of content elements from  fixed width to auto.*/
+  #map, #mapStatus, div.slider-holder, div.graph-holder, #reports-box, #filters-box, .report_left, .report_right, .report_optional {
+    width: auto;
   }
+  
+  /* Stop floating of certain layout containers */
+  #reports-box, #filters-box, .report_left  {float: none;}
 
-  /* header */
-  div#header{
-    display: none;
-  }
+  /* Remove Header */
+  div#header {display: none;}
+  
+  /* Remove right content col from front page */
+  div#right {display: none;}
 
-  /* right column */
-  div#right{
-      float: none;
+  /* Remove Map status from front page */
+  div#mapStatus  {display: none;}
+  
+  /* Reduce blocks on the bottom of the front page */
+  .content-blocks h5 span {display: none;}
+  
+  /* Remove footer links */
+  .feedback_title {display: none;}
+  
+  /* Adjust margins */
+  div#main .withright div#content {
+    margin: 0;
   }
-
-  div#main .withright div#content{
-      margin: 0px 0px 0px 0px;
-  }
-
-  /* Map */
-  div.map {
-      width: auto;
-      hight: 240px;
-  }
-
-  #mapStatus {
-      float: left;
-      width: 100%;
-  }
-
-  div.slider-holder {
-      width: auto;
-  }
+  #filters-box, .report_right  {margin: 20px 0 0 0;}
+  
+  /* adjust some  text sizes */
+  .time-period {}
+  
+  /* Adjust form input elements */
+  .long {width: 95%;}
 }
