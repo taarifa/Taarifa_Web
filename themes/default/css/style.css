@@ -2365,7 +2365,7 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
   div.rapidxwpr {width: auto;}
   
   /* Change width of content elements from  fixed width to auto.*/
-  #map, #mapStatus, div.slider-holder, div.graph-holder, #reports-box, #filters-box, .report_left, .report_right, .report_optional {
+  #map, #mapStatus, div.slider-holder, div.graph-holder, #reports-box, #filters-box, .report_left, .report_right, .report_optional, .report_map {
     width: auto;
   }
   
@@ -2378,11 +2378,14 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
   /* Remove right content col from front page */
   div#right {display: none;}
 
-  /* Remove Map status from front page */
-  div#mapStatus  {display: none;}
+  /* Remove stuff from front page */
+  div#mapStatus, .filters, div.slider-holder, #graph  {display: none;}
   
   /* Reduce blocks on the bottom of the front page */
   .content-blocks h5 span {display: none;}
+  /* Remove official news */
+  #block-news {display: none;}
+  #block-reports {width: 100% !important;}
   
   /* Remove footer links */
   .feedback_title {display: none;}
