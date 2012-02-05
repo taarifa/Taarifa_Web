@@ -1,8 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
+<head manifest="taarifa.manifest">
 	<title><?php echo $site_name; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="./favicon.ico"/>
+
+    <!--<link rel="apple-touch-startup-image" sizes="1024x748" href="LOCATION OF SPLASH SCREEN" />-->
+    <!--<link rel="stylesheet" href="style.css" type="text/css" media="screen, mobile" title="main" charset="utf-8"> // I believe the CSS is held elsewhere.-->
+	
 	<?php echo $header_block; ?>
 	<?php
 	// Action::header_scripts - Additional Inline Scripts from Plugins
