@@ -1,5 +1,6 @@
 /* Handcoded by RapidxHTML - htp://www.rapidxhtml.com */
 
+@media only screen and (max-width: 480px) {
 /* reset */
 body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
@@ -2357,11 +2358,11 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     margin:0px 5px;
 }
 
-@media all and (max-width: 500px) {
+/* Settings for a mobile version */
   /* wrapper setup */
   div.rapidxwpr{
-      margin: auto;
-      width: 420px;
+      margin: 10px;
+      width: auto;
   }
 
   /* header */
@@ -2372,5 +2373,24 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
   /* right column */
   div#right{
       float: none;
+  }
+
+  div#main .withright div#content{
+      margin: 0px 0px 0px 0px;
+  }
+
+  /* Map */
+  div.map {
+      width: auto;
+      hight: 240px;
+  }
+
+  #mapStatus {
+      float: left;
+      width: 100%;
+  }
+
+  div.slider-holder {
+      width: auto;
   }
 }
