@@ -38,25 +38,25 @@
 							
 	   				    ?>
 					</ul>
+				<hr>
+				<p />
+				<p>Here are instructions for changing file permissions:</p>
+        		<ul>
+            		<li><a href="http://www.washington.edu/computing/unix/permissions.html" target="_blank">Unix/Linux</a></li>
+            		<li><a href="http://support.microsoft.com/kb/308419" target="_blank">Windows</a></li>
+        		</ul>
+        		<p>On Unix/Linux, you can change the permissions as follows:</p>
+        	 	<ul>
+        	 		<li>cd path-to-webserver-document-root-directory</li>
+                	<li>chmod -R 777 application/config</li>
+                	<li>chmod -R 777 application/cache</li>
+                	<li>chmod -R 777 application/logs</li>
+                	<li>chmod -R 777 media/uploads</li>
+                	<li>chmod 777 .htaccess</li>
+            	</ul> 
 			</div>
     	<?php } ?>
-    <div class="feedback info"> 
-    	<p>Before you get started, you will need to make sure the following files and folders are writable by your webserver. This involves changing file permissions.</p>
-            <ul>
-                <li>application/config/config.php</li>
-                <li>application/config</li>
-                <li>application/cache</li>
-                <li>application/logs</li>
-                <li>media/uploads</li>
-                <li>.htaccess</li>
-            </ul> 
-            
-        <p>Here are instructions for changing file permissions:</p>
-        <ul>
-            <li><a href="http://www.washington.edu/computing/unix/permissions.html" target="_blank">Unix/Linux</a></li>
-            <li><a href="http://support.microsoft.com/kb/308419" target="_blank">Windows</a></li>
-        </ul>
-    </div>
+    
 		
     
 	<p>For the installation process, please have the following bits of information on hand.</p>	
