@@ -16,12 +16,12 @@
     <div id="ushahidi_login_logo"><img src="../media/img/admin/logo_login.gif" /></div>
     <div id="ushahidi_login" class="clearfix">
     
-	<p>Welcome to the Ushahidi server install process.</p>
+	<p>Welcome to the Taarifa server install process.</p>
 		
 	<a href="basic_summary.php" class="tc-left btn-box">
-		<span class="btn-box-title">BASIC INSTALLATION</span>
-		<span class="btn-box-content">Simple and fast.  All you need is your website's root directory and your database information. You can configure everything else later.</span>
-		<span class="last btn-action">Proceed with basic &rarr;</span>
+		<span class="btn-box-title">INSTALLATION</span>
+		<span class="btn-box-content">All you need is your website's root directory and your database information. You can configure everything else later.</span>
+		<span class="last btn-action">Proceed &rarr;</span>
 	</a>
         	
 	</div>
