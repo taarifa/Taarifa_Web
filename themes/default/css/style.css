@@ -1,6 +1,5 @@
 /* Handcoded by RapidxHTML - htp://www.rapidxhtml.com */
 
-@media only screen and (max-width: 480px) {
 /* reset */
 body,div,dl,dt,dd,ul,ol,li,pre,form,fieldset,input,textarea,p,blockquote,th,td {
     margin: 0;
@@ -2359,6 +2358,7 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
 }
 
 /* Settings for a mobile version */
+@media only screen and (max-width: 480px) {
   /* wrapper setup */
   div.rapidxwpr{
       margin: 10px;
