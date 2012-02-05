@@ -185,8 +185,10 @@ div#content{
 }
 
 div#main .withright div#content{
-    margin: 0px 325px 0px 0px;
-    padding: 0px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 577px;
 }
 
 div#main .withoutright div#content{
