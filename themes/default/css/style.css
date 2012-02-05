@@ -2356,3 +2356,21 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     padding:5px;
     margin:0px 5px;
 }
+
+@media all and (max-width: 500px) {
+  /* wrapper setup */
+  div.rapidxwpr{
+      margin: auto;
+      width: 420px;
+  }
+
+  /* header */
+  div#header{
+    display: none;
+  }
+
+  /* right column */
+  div#right{
+      float: none;
+  }
+}
