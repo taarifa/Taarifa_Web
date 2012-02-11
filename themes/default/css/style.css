@@ -2358,6 +2358,23 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     margin:0px 5px;
 }
 
+
+/*Take over the formating of the h4 Headlines*/
+label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-top: 0;
+    padding: 0;
+    font-size: 175%;
+    color: #333333;
+}
+
+.report_row label {
+    margin:0 0 5px 0;
+    font-size:120%;
+}
+
+
 /* Change CSS for  the mobile view */
  @media only screen and (max-width: 480px) {
   
@@ -2401,4 +2418,44 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
   
   /* Adjust form input elements */
   .long {width: 95%;}
+
+  /*Display of inline labels*/
+
+  label.inlined {
+    font-weight: normal;
+    padding-left: 12px;
+    opacity: 0.75;
+    -webkit-transition: opacity 0.15s linear;
+  }
+
+  /* Move the inline label above the textbox */
+  label.inlined + input.text {
+    margin-top: -22px;
+  }
+  label.inlined + textarea.text {
+    margin-top: -22px;
+  }
+
+  /* put the textbox behind the label */
+  input.text {
+    z-index: 1;
+  }
+  label {
+    z-index: 2;
+  }
+
+  label.focus {
+    opacity: 0.35;
+  }
+
+  /* A bit hacky: Distance of the form selector to the first field*/
+  #form_id {
+    margin-bottom: 10px;
+  }
+
+  label.has-text {
+    opacity: 0.0;
+    -webkit-transition-duration: 0s;
+  }
 }
+

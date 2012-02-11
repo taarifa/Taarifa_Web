@@ -46,12 +46,12 @@
 						</h4>
 					</div>
 					<?php } ?>
-					<h4><?php echo Kohana::lang('ui_main.reports_title'); ?></h4>
+					<label for="incident_title" class="inlined" id="incident_title_label"><?php echo Kohana::lang('ui_main.reports_title'); ?></label>
 					<?php print form::input('incident_title', $form['incident_title'], ' class="text long"'); ?>
 				</div>
 				<div class="report_row">
-					<h4><?php echo Kohana::lang('ui_main.reports_description'); ?></h4>
-					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long" ') ?>
+					<label for="incident_description" class="inlined"><?php echo Kohana::lang('ui_main.reports_description'); ?></label>
+					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long text" ') ?>
 				</div>
 				<div class="report_row" id="datetime_default">
 					<h4>
@@ -127,15 +127,15 @@
 				<div class="report_optional">
 					<h3><?php echo Kohana::lang('ui_main.reports_optional'); ?></h3>
 					<div class="report_row">
-						<h4><?php echo Kohana::lang('ui_main.reports_first'); ?></h4>
+            <label for="person_first" class="inlined"><?php echo Kohana::lang('ui_main.reports_first'); ?></label>
 						<?php print form::input('person_first', $form['person_first'], ' class="text long"'); ?>
 					</div>
 					<div class="report_row">
-						<h4><?php echo Kohana::lang('ui_main.reports_last'); ?></h4>
+						<label for="person_last" class="inlined"><?php echo Kohana::lang('ui_main.reports_last'); ?></label>
 						<?php print form::input('person_last', $form['person_last'], ' class="text long"'); ?>
 					</div>
 					<div class="report_row">
-						<h4><?php echo Kohana::lang('ui_main.reports_email'); ?></h4>
+						<label for="person_email" class="inlined"><?php echo Kohana::lang('ui_main.reports_email'); ?></label>
 						<?php print form::input('person_email', $form['person_email'], ' class="text long"'); ?>
 					</div>
 					<?php
