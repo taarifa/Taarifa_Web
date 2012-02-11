@@ -56,7 +56,7 @@
 					<?php if($loggedin_username != FALSE){ ?>
 						<a href="<?php echo url::site().$loggedin_role;?>"><?php echo $loggedin_username; ?></a> [<a href="<?php echo url::site();?>logout/front"><?php echo Kohana::lang('ui_admin.logout');?></a>]
 					<?php } else { ?>
-						<a href="<?php echo url::site()."members/";?>"><?php echo Kohana::lang('ui_main.login'); ?></a>
+						<a href="<?php echo url::site()."login/";?>"><?php echo Kohana::lang('ui_main.login'); ?></a>
 					<?php } ?>
 				</div><br/>
 				<!-- / user actions -->
