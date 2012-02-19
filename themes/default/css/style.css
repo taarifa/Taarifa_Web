@@ -454,6 +454,7 @@ div.slider-holder {
     margin-top:15px;
     width:554px;
     padding-left: 11px;
+    padding-right: 11px;
 }
 
 div.slider-holder label{
@@ -2356,3 +2357,105 @@ a.filter-button:hover { text-decoration:none; background:#707070;  }
     padding:5px;
     margin:0px 5px;
 }
+
+
+/*Take over the formating of the h4 Headlines*/
+label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-top: 0;
+    padding: 0;
+    font-size: 175%;
+    color: #333333;
+}
+
+.report_row label {
+    margin:0 0 5px 0;
+    font-size:120%;
+}
+
+
+/* Change CSS for  the mobile view */
+ @media only screen and (max-width: 480px) {
+  
+  /* Change wrapper width from  fixed 960px to auto */
+  div.rapidxwpr {width: auto;}
+  
+  /* Change width of content elements from  fixed width to auto.*/
+  #map, #mapStatus, div.slider-holder, div.graph-holder, #reports-box, #filters-box, .report_left, .report_right, .report_optional, .report_map {
+    width: auto;
+  }
+  
+  /* Stop floating of certain layout containers */
+  #reports-box, #filters-box, .report_left  {float: none;}
+
+  /* Remove Header */
+  div#header {display: none;}
+  
+  /* Remove right content col from front page */
+  div#right {display: none;}
+
+  /* Remove stuff from front page */
+  div#mapStatus, .filters, div.slider-holder, #graph  {display: none;}
+  
+  /* Reduce blocks on the bottom of the front page */
+  .content-blocks h5 span {display: none;}
+  /* Remove official news */
+  #block-news {display: none;}
+  #block-reports {width: 100% !important;}
+  
+  /* Remove footer links */
+  .feedback_title {display: none;}
+  
+  /* Adjust margins */
+  div#main .withright div#content {
+    margin: 0;
+  }
+  #filters-box, .report_right  {margin: 20px 0 0 0;}
+  
+  /* adjust some  text sizes */
+  .time-period {}
+  
+  /* Adjust form input elements */
+  .long {width: 95%;}
+
+  /*Display of inline labels*/
+
+  label.inlined {
+    font-weight: normal;
+    padding-left: 12px;
+    opacity: 0.75;
+    -webkit-transition: opacity 0.15s linear;
+  }
+
+  /* Move the inline label above the textbox */
+  label.inlined + input.text {
+    margin-top: -22px;
+  }
+  label.inlined + textarea.text {
+    margin-top: -22px;
+  }
+
+  /* put the textbox behind the label */
+  input.text {
+    z-index: 1;
+  }
+  label {
+    z-index: 2;
+  }
+
+  label.focus {
+    opacity: 0.35;
+  }
+
+  /* A bit hacky: Distance of the form selector to the first field*/
+  #form_id {
+    margin-bottom: 10px;
+  }
+
+  label.has-text {
+    opacity: 0.0;
+    -webkit-transition-duration: 0s;
+  }
+}
+

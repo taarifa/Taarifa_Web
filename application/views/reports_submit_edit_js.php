@@ -880,3 +880,47 @@
 				}
 			});
 		}
+    
+/**
+ * Get the current location and fill in coordinates into the form if available.
+ * Inspired by http://merged.ca/iphone/html5-geolocation
+ */
+jQuery().ready(function() {
+  if (navigator.geolocation) 
+  {
+  	navigator.geolocation.getCurrentPosition(
+      // Callback when geo location is available.
+  		function (position) {
+        // Set the value of the "find location" form to the current geo coordinates and fires geoCode() to update the the map and set value of "Refine Location Name"
+        jQuery('#location_find').val(position.coords.latitude + ',' + position.coords.longitude);
+        geoCode();
+  		}, 
+  		// Error callback.
+  		function (error)
+  		{
+        /* Don't handle errors for now. We can just ignore it.*/
+  		}
+  		);
+  	}
+});
+
+/**
+ * Animate inline labels
+ * Inspired by http://
+ */
+
+$(document).ready(function(){
+	$("label.inlined + .text").each(function (type) {
+			$(this).focus(function () {
+					$(this).prev("label.inlined").addClass("focus");
+			});
+			$(this).keypress(function () {
+					$(this).prev("label.inlined").addClass("has-text").removeClass("focus");
+			});
+			$(this).blur(function () {
+					if($(this).val() == "") {
+						$(this).prev("label.inlined").removeClass("has-text").removeClass("focus");
+					}
+			});
+		});
+});
