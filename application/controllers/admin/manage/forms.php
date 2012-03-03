@@ -357,7 +357,14 @@ class Forms_Controller extends Admin_Controller {
 		
 		if ($field_id > 0 AND $form_id > 0)
 		{
-			ORM::factory('form_field')->delete($field_id);
+            // The following is backported from latest Ushahidi
+            // START ->
+            $form_field = ORM::factory('form_field', $field_id);
+            if ($form_field->loaded)
+            {
+                $form_field->delete();
+            }
+            // -> END
 			$return_content = customforms::get_current_fields($form_id,$this->user);
 		}
 		
