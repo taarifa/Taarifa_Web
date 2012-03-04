@@ -413,8 +413,9 @@ class Forms_Controller extends Admin_Controller {
 				{
 					// Move down the fields whose position value is greater
 					// than that of the selected field 
-					$sql = "UPDATE %sform_field SET field_position = field_position + 1 WHERE id != %d";
-					$this->db->query(sprintf($sql, $this->table_prefix, $field_id));
+                    // Cherry-picked from Ushahidi to fix Github issue #29
+                    $sql = "UPDATE %sform_field SET field_position = %d WHERE field_position = %d";
+                    $this->db->query(sprintf($sql, $this->table_prefix, $current_position, $current_position-1));
 
 					// Move the selected field upwards
 					$field->field_position = $current_position - 1;
@@ -423,8 +424,9 @@ class Forms_Controller extends Admin_Controller {
 				elseif ($field_position == 'd' AND $current_position != $total_fields)
 				{ 
 					// Move all other form fields upwards
-					$sql = "UPDATE %sform_field SET field_position = field_position - 1 WHERE id != %d";
-					$this->db->query(sprintf($sql, $this->table_prefix, $field_id));
+					// Cherry-picked from Ushahidi to fix Github issue #29
+                    $sql = "UPDATE %sform_field SET field_position = %d WHERE field_position = %d";
+                    $this->db->query(sprintf($sql, $this->table_prefix,  $current_position, $current_position + 1));
 					
 					// Move the selected field downwards - increase its field position in the database
 					$field->field_position = $current_position + 1;
@@ -981,7 +983,7 @@ class Forms_Controller extends Admin_Controller {
 		$html .="        	$('#formadd_".$form_id."').hide(300);";
 		$html .="        	$('#form_fields_".$form_id."').hide();";
 		$html .="        	$('#form_fields_current_".$form_id."').html('');";
-		$html .="        	$('#form_fields_current_".$form_id."').html(unescape(data.response));";
+		$html .="        	$('#form_fields_current_".$form_id."').html(decodeURIComponent(data.response));"
 		$html .="        	$('#form_fields_current_".$form_id."').effect(\"highlight\", {}, 2000);";
 		$html .="        };";
 		$html .="    } ";
