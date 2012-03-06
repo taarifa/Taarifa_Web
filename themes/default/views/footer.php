@@ -47,7 +47,7 @@
 
       
 			<h2 class="feedback_title" style="clear:both">
-				<a href="http://feedback.taarifa.org/fillsurvey.php?sid=2"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
+				<a href="http://www.surveymonkey.com/s/SM7LWGB"><?php echo Kohana::lang('ui_main.feedback'); ?></a>
 			</h2>
 
  
