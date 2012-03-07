@@ -357,14 +357,12 @@ class Forms_Controller extends Admin_Controller {
 		
 		if ($field_id > 0 AND $form_id > 0)
 		{
-            // The following is backported from latest Ushahidi
-            // START ->
+            // Cherry-picked from Ushahidi - fixes issue #27
             $form_field = ORM::factory('form_field', $field_id);
             if ($form_field->loaded)
             {
                 $form_field->delete();
             }
-            // -> END
 			$return_content = customforms::get_current_fields($form_id,$this->user);
 		}
 		
@@ -983,7 +981,7 @@ class Forms_Controller extends Admin_Controller {
 		$html .="        	$('#formadd_".$form_id."').hide(300);";
 		$html .="        	$('#form_fields_".$form_id."').hide();";
 		$html .="        	$('#form_fields_current_".$form_id."').html('');";
-		$html .="        	$('#form_fields_current_".$form_id."').html(decodeURIComponent(data.response));"
+		$html .="        	$('#form_fields_current_".$form_id."').html(decodeURIComponent(data.response));";
 		$html .="        	$('#form_fields_current_".$form_id."').effect(\"highlight\", {}, 2000);";
 		$html .="        };";
 		$html .="    } ";
