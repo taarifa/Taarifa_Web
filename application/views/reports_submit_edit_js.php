@@ -321,7 +321,11 @@
 				}
 			});
 			
-			/* Form Actions */
+      /* Form Actions */
+      // Disable all Submit buttons once they have been clicked
+      $('form').submit(function() {
+        $('input[type=submit]', this).css('background-color', '#aaa').attr('disabled', 'disabled');
+      });
 			// Action on Save Only
 			$('.btn_save').live('click', function () {
 				$("#save").attr("value", "1");
