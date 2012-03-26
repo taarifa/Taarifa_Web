@@ -862,50 +862,12 @@ class Reports_Controller extends Admin_Controller {
 			 //	Add some filters
 			$post->pre_filter('trim', TRUE);
 
-			// Add some rules, the input field, followed by a list of checks, carried out in order
-			$post->add_rules('data_point.*','required','numeric','between[1,4]');
-			//$post->add_rules('data_include.*','numeric','between[1,5]');
-			$post->add_rules('data_include.*','numeric','between[1,6]');
-			$post->add_rules('from_date','date_mmddyyyy');
-			$post->add_rules('to_date','date_mmddyyyy');
-
-			// Validate the report dates, if included in report filter
-			if (!empty($_POST['from_date']) OR !empty($_POST['to_date']))
-			{
-				// Valid FROM Date?
-				if (empty($_POST['from_date']) OR (strtotime($_POST['from_date']) > strtotime("today")))
-				{
-					$post->add_error('from_date','range');
-				}
-
-				// Valid TO date?
-				if (empty($_POST['to_date']) OR (strtotime($_POST['to_date']) > strtotime("today")))
-				{
-					$post->add_error('to_date','range');
-				}
-
-				// TO Date not greater than FROM Date?
-				if (strtotime($_POST['from_date']) > strtotime($_POST['to_date']))
-				{
-					$post->add_error('to_date','range_greater');
-				}
-			}
-
 			// Test to see if things passed the rule checks
 			if ($post->validate())
 			{
-				// Report Date Filter
-        // Not used yet, unsure if we want to keep the date selection
-				if ( ! empty($post->from_date) AND !empty($post->to_date))
-				{
-					$date_filter = "( incident_date >= '" . date("Y-m-d H:i:s",strtotime($post->from_date))
-							. "' AND incident_date <= '" . date("Y-m-d H:i:s",strtotime($post->to_date)) . "' ) ";
-				}
-				//$incidents = ORM::factory('incident')->where($filter)->orderby('incident_dateadd', 'desc')->find_all();
-
 				// Retrieve reports
-        // Remove the filtering for the moment, because it crashes the query
         $form_id = $_POST['form_id'];
+        Kohana::log('error', 'Form id = '. $form_id);
         $incidents = ORM::factory('incident')->where('form_id',$form_id)
           ->orderby('incident_dateadd', 'desc')->find_all();
 
