@@ -901,11 +901,11 @@ class Reports_Controller extends Admin_Controller {
 					$date_filter = "( incident_date >= '" . date("Y-m-d H:i:s",strtotime($post->from_date))
 							. "' AND incident_date <= '" . date("Y-m-d H:i:s",strtotime($post->to_date)) . "' ) ";
 				}
+				//$incidents = ORM::factory('incident')->where($filter)->orderby('incident_dateadd', 'desc')->find_all();
 
 				// Retrieve reports
-				//$incidents = ORM::factory('incident')->where($filter)->orderby('incident_dateadd', 'desc')->find_all();
         // Remove the filtering for the moment, because it crashes the query
-        $form_id = 3;
+        $form_id = $_POST['form_id'];
         $incidents = ORM::factory('incident')->where('form_id',$form_id)
           ->orderby('incident_dateadd', 'desc')->find_all();
 
@@ -1536,4 +1536,14 @@ class Reports_Controller extends Admin_Controller {
     }
     return rtrim($csv, ',');
   }
+
+  public function get_custom_forms(){
+		$custom_forms = array();
+		foreach (ORM::factory('form')->where('form_active',1)->find_all() as $custom_form)
+		{
+			$custom_forms[$custom_form->id] = $custom_form->form_title;
+		}
+    return $custom_forms;
+  }
+
 }
