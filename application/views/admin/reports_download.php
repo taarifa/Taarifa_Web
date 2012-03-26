@@ -44,31 +44,11 @@
 			<span style="font-weight: bold; color: #00699b; display: block; padding-bottom: 5px;"><?php echo Kohana::lang('ui_main.choose_data_points');?>:</span>
 			<?php print form::open(NULL, array('id' => 'reportForm', 'name' => 'reportForm')); ?>
 			<table class="data_points">
-				<tr>
-					<td colspan="2">
-						<input type="checkbox" id="data_all" name="data_all" checked="checked" onclick="CheckAll(this.id)" /><strong><?php echo strtoupper(Kohana::lang('ui_main.select_all'));?></strong>
-						<div id="form_error1"></div>
-					</td>
-				</tr>
-				<tr>
-					<td><?php print form::checkbox('data_point[]', '1', TRUE); ?><?php echo Kohana::lang('ui_main.approved_reports');?></td>
-					<td><?php print form::checkbox('data_include[]', '1', TRUE); ?><?php echo Kohana::lang('ui_main.include_location_information');?></td>
-				</tr>
-				<tr>
-					<td><?php print form::checkbox('data_point[]', '2', TRUE); ?><?php echo Kohana::lang('ui_main.verified_reports');?></td>
-					<td><?php print form::checkbox('data_include[]', '2', TRUE); ?><?php echo Kohana::lang('ui_main.include_description');?></td>
-				</tr>
-				<tr>
-					<td><?php print form::checkbox('data_point[]', '3', TRUE); ?><?php echo Kohana::lang('ui_main.reports');?> <?php echo Kohana::lang('ui_main.awaiting_approval');?></td>
-					<td><?php print form::checkbox('data_include[]', '3', TRUE); ?><?php echo Kohana::lang('ui_main.include_categories');?></td>
-				</tr>
-                                <tr>
-                                        <td><?php print form::checkbox('data_point[]', '4', TRUE); ?><?php echo Kohana::lang('ui_main.reports');?> <?php echo Kohana::lang('ui_main.awaiting_verification');?></td>
-                                        <td><?php print form::checkbox('data_include[]','4',TRUE); ?><?php echo Kohana::lang('ui_main.include_latitude');?></td>
-                                </tr>
-                                <tr>
-                                        <td><?php print form::checkbox('data_include[]','5',TRUE); ?><?php echo Kohana::lang('ui_main.include_longitude');?></td>
-                                </tr>
+        <tr>
+          <td>
+            <h4>Select Form</h4>
+            <?php echo form::dropdown('form_id', $this->get_custom_forms());?>
+          </td>
 				<tr>
 					<td colspan="2">
 						<div class="date-box">
