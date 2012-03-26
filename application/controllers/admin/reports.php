@@ -894,156 +894,73 @@ class Reports_Controller extends Admin_Controller {
 			// Test to see if things passed the rule checks
 			if ($post->validate())
 			{
-				// Add Filters
-				$filter = " ( ";
-				
-				// Report Type Filter
-				foreach($post->data_point as $item)
-				{
-					if ($item == 1)
-					{
-						$filter .= " OR incident_active = 1 ";
-					}
-					
-					if ($item == 2)
-					{
-						$filter .= " OR incident_verified = 1 ";
-					}
-					
-					if ($item == 3)
-					{
-						$filter .= " OR incident_active = 0 ";
-					}
-					
-					if ($item == 4)
-					{
-						$filter .= " OR incident_verified = 0 ";
-					}
-				}
-				$filter .= ") ";
-
 				// Report Date Filter
+        // Not used yet, unsure if we want to keep the date selection
 				if ( ! empty($post->from_date) AND !empty($post->to_date))
 				{
-					$filter .= " AND ( incident_date >= '" . date("Y-m-d H:i:s",strtotime($post->from_date))
+					$date_filter = "( incident_date >= '" . date("Y-m-d H:i:s",strtotime($post->from_date))
 							. "' AND incident_date <= '" . date("Y-m-d H:i:s",strtotime($post->to_date)) . "' ) ";
 				}
 
 				// Retrieve reports
-				$incidents = ORM::factory('incident')->where($filter)->orderby('incident_dateadd', 'desc')->find_all();
+				//$incidents = ORM::factory('incident')->where($filter)->orderby('incident_dateadd', 'desc')->find_all();
+        // Remove the filtering for the moment, because it crashes the query
+        $form_id = 3;
+        $incidents = ORM::factory('incident')->where('form_id',$form_id)
+          ->orderby('incident_dateadd', 'desc')->find_all();
 
-				// Column Titles
-				$report_csv = "#,INCIDENT TITLE,INCIDENT DATE";
-				foreach($post->data_include as $item)
-				{
-					if ($item == 1) {
-						$report_csv .= ",LOCATION";
-					}
-					
-					if ($item == 2) {
-						$report_csv .= ",DESCRIPTION";
-					}
-					
-					if ($item == 3) {
-						$report_csv .= ",CATEGORY";
-					}
-					
-					if ($item == 4) {
-						$report_csv .= ",LATITUDE";
-					}
-					
-					if($item == 5) {
-						$report_csv .= ",LONGITUDE";
-					}
-					if($item == 6)
-					{
-						$custom_titles = ORM::factory('form_field')->orderby('field_position','desc')->find_all();
-						foreach($custom_titles as $field_name)
-						{
+        $column_names = array('id', 'incident_title', 'incident_date', 'incident_description',
+                              'incident_active', 'incident_verified', 'incident_rating', 'incident_mode',
+                              'incident_datemodify');
+        $sub_models = array('location' => array('location_name', 'latitude', 'longitude'));
+        $cat_names = Category_Model::get_category_names();
 
-							$report_csv .= ",".$field_name->field_name;
-						}	
+				$header = '';
+        foreach($column_names as $column){
+          $header .= $column . ',';
+        }
+        foreach(array_values($sub_models) as $values){
+          foreach($values as $value){
+            $header .= $value . ',';
+          }
+        }
+        foreach($cat_names as $c){
+          $header .= $c . ',';
+        }
+        foreach(ORM::factory('form_field')->where('form_id',$form_id)
+          ->orderby('id', 'desc')->find_all() as $custom_field){
+          $header .= $custom_field->field_name . ',';
+        }
+        $header = rtrim($header, ',') . "\n";
 
-					}
+        $body = '';
+        foreach($incidents as $incident){
+          // Basic properties
+          $body .= $this->_get_cs_list($incident, $column_names) . ',';
+          //sub objects
+          foreach(array_keys($sub_models) as $sub_model){
+            $columns = $sub_models[$sub_model];
+            $body .= $this->_get_cs_list($incident->$sub_model, $columns) . ',';
+          }
+          // categories
+          foreach($cat_names as $c){
+            $found = False;
+            foreach($incident->incident_category as $incident_category){
+              $found = $found | $incident_category->category->category_title == $c;
+            }
+            $body .= $this->_csv_text($found) . ',';
+          }
+          //custom fields
+          $custom_fields = ORM::factory('form_response')->where('incident_id',$incident->id)
+            ->orderby('form_field_id','desc')->find_all();
+          foreach($custom_fields as $custom_field)
+          {
+            $body .= $this->_csv_text($custom_field->form_response) . ',';
+          }	
+          $body = rtrim($body, ',') . "\n";
+        }
 
-				}
-				
-				$report_csv .= ",APPROVED,VERIFIED";
-				
-				
-				$report_csv .= "\n";
-
-				foreach ($incidents as $incident)
-				{
-					$report_csv .= '"'.$incident->id.'",';
-					$report_csv .= '"'.$this->_csv_text($incident->incident_title).'",';
-					$report_csv .= '"'.$incident->incident_date.'"';
-
-					foreach($post->data_include as $item)
-					{
-						switch ($item)
-						{
-							case 1:
-								$report_csv .= ',"'.$this->_csv_text($incident->location->location_name).'"';
-							break;
-
-							case 2:
-								$report_csv .= ',"'.$this->_csv_text($incident->incident_description).'"';
-							break;
-
-							case 3:
-								$report_csv .= ',"';
-							
-								foreach($incident->incident_category as $category)
-								{
-									if ($category->category->category_title)
-									{
-										$report_csv .= $this->_csv_text($category->category->category_title) . ", ";
-									}
-								}
-								$report_csv .= '"';
-							break;
-						
-							case 4:
-								$report_csv .= ',"'.$this->_csv_text($incident->location->latitude).'"';
-							break;
-						
-							case 5:
-								$report_csv .= ',"'.$this->_csv_text($incident->location->longitude).'"';
-							break;
-
-							case 6:
-								$incident_id = $incident->id;
-								$custom_fields = ORM::factory('form_response')->where('incident_id',$incident_id)->orderby('form_field_id','desc')->find_all();
-								foreach($custom_fields as $custom_field)
-								{
-									$report_csv .=',"'.$this->_csv_text($custom_field->form_response).'"';
-								}	
-								break;
-
-						}
-					}
-					
-					if ($incident->incident_active)
-					{
-						$report_csv .= ",YES";
-					}
-					else
-					{
-						$report_csv .= ",NO";
-					}
-					
-					if ($incident->incident_verified)
-					{
-						$report_csv .= ",YES";
-					}
-					else
-					{
-						$report_csv .= ",NO";
-					}
-					
-					$report_csv .= "\n";
-				}
+        $report_csv = $header . $body;
 
 				// Output to browser
 				header("Content-type: text/x-csv");
@@ -1052,7 +969,6 @@ class Reports_Controller extends Admin_Controller {
 				header("Content-Length: " . strlen($report_csv));
 				echo $report_csv;
 				exit;
-
 			}
 			
 			// No! We have validation errors, we need to show the form again, with the errors
@@ -1608,7 +1524,16 @@ class Reports_Controller extends Admin_Controller {
 
 	private function _csv_text($text)
 	{
-		$text = stripslashes(htmlspecialchars($text));
-		return $text;
+		return '"' . stripslashes(htmlspecialchars($text)) . '"';
 	}
+
+  private function _get_cs_list($object, $columns)
+    //returns the values of the object specified in $columns seperated by commata
+  {
+    $csv = '';
+    foreach($columns as $column){
+      $csv .= $this->_csv_text($object->$column) . ','; 
+    }
+    return rtrim($csv, ',');
+  }
 }
