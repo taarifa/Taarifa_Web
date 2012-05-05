@@ -891,7 +891,10 @@
  * Inspired by http://merged.ca/iphone/html5-geolocation
  */
 jQuery().ready(function() {
-  if (navigator.geolocation) 
+  // A bit hacky, as we check the url name to determine if
+  // we are on the Admin Page
+  var onAdminPage = document.URL.indexOf("admin") != -1;
+  if (!onAdminPage && navigator.geolocation) 
   {
   	navigator.geolocation.getCurrentPosition(
       // Callback when geo location is available.
