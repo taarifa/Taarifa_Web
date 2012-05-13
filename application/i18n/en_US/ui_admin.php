@@ -53,6 +53,7 @@
 	'comments' => 'Comments',
 	'confirmation_code' => 'Your alerts confirmation code is: ',
 	'confirm_msg' => 'The User Has Been',
+  'copied' => 'copied',
 	'count' => 'Count',
 	'country_not_found' => 'Country Not Found',
 	'created_edited' => 'created/edited',
