@@ -56,7 +56,6 @@ class Forms_Controller extends Admin_Controller {
 		if( $_POST ) 
 		{
 			$post = Validation::factory( $_POST );
-			
 			 //  Add some filters
 	        $post->pre_filter('trim', TRUE);
 	
@@ -100,6 +99,32 @@ class Forms_Controller extends Admin_Controller {
 						$form_action = strtoupper(Kohana::lang('ui_admin.modified'));
 					}
 				}
+        elseif($post->action == 'copy')
+        {
+          // Copy the form ...
+          $form_to_copy = ORM::factory('form', $form_id);
+          $new_form = ORM::factory('form');
+          $new_form = $this->create_db_entry_copy($form_to_copy, $new_form);
+          $new_form->form_title = $new_form->form_title . "(copy)";
+          $new_form->save();
+
+          // ... the form fields ...
+          foreach($form_to_copy->form_field as $field) {
+            $new_field = ORM::factory('form_field');
+            $new_field = $this->create_db_entry_copy($field, $new_field);
+            $new_field->form_id = $new_form->id; // connect the field to the new form
+            $new_field->save();
+            // ... and their options.
+            foreach($field->form_field_options as $option) {
+              $new_option = ORM::factory('form_field_option');
+              $new_option = $this->create_db_entry_copy($option, $new_option);
+              $new_option->form_field_id = $new_field->id;
+              $new_option->save();
+            }
+          }
+          $form_saved = TRUE;
+          $form_action = strtoupper(Kohana::lang('ui_admin.copied'));
+        }
 				else
 				{
 					// Save Action
@@ -167,7 +192,20 @@ class Forms_Controller extends Admin_Controller {
 		$this->template->form_error = $form_error;
 	}
 
-	
+  /**
+   * Copies the db object. Needs to supply the prototype
+   * of the new object
+   */
+  private function create_db_entry_copy($obj_to_copy, $new_obj){
+    $val_array = $obj_to_copy->as_array();
+    array_shift($val_array); // To remove ID
+
+    foreach($val_array as $key => $value){
+      $new_obj->$key = $value;
+    }
+    return $new_obj;
+  }
+
 	/**
 	* Generates Form Field Entry Form (Add/Edit) via Ajax Request
     */
