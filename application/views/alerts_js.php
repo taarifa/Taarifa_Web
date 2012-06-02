@@ -145,7 +145,7 @@
 						drawCircle(data.message[1],data.message[0], radius);
 						
 						// Looking up country name using reverse geocoding					
-						reverseGeocode(data.message[0], data.message[1]);
+						reverseGeocode(data.message[0], data.message[1]); 
 					
 						// Update form values (jQuery)
 						$("#alert_lat").attr("value", data.message[0]);
@@ -159,7 +159,8 @@
 		}	
 			
 		// Reverse GeoCoder
-		function reverseGeocode(latitude, longitude) {		
+		function reverseGeocode(latitude, longitude) {	
+		  if (typeof google == 'undefined') return false;	
 			var latlng = new google.maps.LatLng(latitude, longitude);
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({'latLng': latlng}, function(results, status){

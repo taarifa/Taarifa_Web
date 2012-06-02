@@ -97,7 +97,6 @@ themes/default/images/search-button.jpg
 themes/default/images/share.jpg
 themes/default/images/submit-incident.png
 themes/default/images/tooltip-arrow.png
-themes/default/img/openlayers/layer-switcher-minimize.png
 
 #javascript files
 media/js/OpenLayers.js

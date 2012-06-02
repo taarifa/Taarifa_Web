@@ -868,7 +868,8 @@
 		}
 		
 		// Reverse GeoCoder
-		function reverseGeocode(latitude, longitude) {		
+		function reverseGeocode(latitude, longitude) {
+		  if (typeof google == 'undefined') return false;
 			var latlng = new google.maps.LatLng(latitude, longitude);
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({'latLng': latlng}, function(results, status){
