@@ -125,7 +125,7 @@ class Themes_Core {
 		//$core_js .= html::script($this->js_url."media/js/jquery.ui.min", true);
 		$core_js .= html::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js", true);
 		$core_js .= html::script($this->js_url."media/js/jquery.pngFix.pack", true);
-		
+				
 		if ($this->map_enabled)
 		{
 			$core_js .= $this->api_url;
@@ -161,6 +161,11 @@ class Themes_Core {
 		{
 			$core_js .= html::script($this->js_url."media/js/offlineform.jquery", true);
 	 	}
+
+		if ($this->offline_capability)
+		{
+		  $core_js .= html::script($this->js_url."media/js/offlineData", true);
+		}
 
 		if($this->videoslider_enabled )
 		{

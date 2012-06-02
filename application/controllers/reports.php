@@ -47,6 +47,7 @@ class Reports_Controller extends Main_Controller {
 		
 		// Enable the map
 		$this->themes->map_enabled = TRUE;
+		$this->themes->offline_capability = TRUE;
 		
 		// Set the latitude and longitude
 		$this->themes->js->latitude = Kohana::config('settings.default_lat');
@@ -395,6 +396,7 @@ class Reports_Controller extends Main_Controller {
 
 		// Javascript Header
 		$this->themes->map_enabled = TRUE;
+		$this->themes->offline_capability = TRUE;
 		$this->themes->datepicker_enabled = TRUE;
 		$this->themes->treeview_enabled = TRUE;
 		$this->themes->colorpicker_enabled = TRUE;

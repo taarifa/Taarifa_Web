@@ -109,6 +109,7 @@ media/js/selectToUISlider.jQuery.js
 media/js/jquery.flot.js
 media/js/timeline.js
 media/js/offlineform.jquery.js
+media/js/offlineData.js
 
 NETWORK:
 * 
