@@ -180,6 +180,8 @@ class Themes_Core {
 		{
 			$core_js .= html::script($theme_js,"",true);
 		}
+    // javascript for plotting
+    $core_js .= html::script($this->js_url."media/js/dygraph-combined.js");
 		
 		// Inline Javascript
 		$inline_js = "<script type=\"text/javascript\">
