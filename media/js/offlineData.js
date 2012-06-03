@@ -12,7 +12,6 @@ function sendDataToServer(serialized_form, success_callback) {
 
 function submitForm(form) {
 	// If online, proceed with normal form submission.
-	// @todo: uncomment after dev!!!!
 	if (navigator.onLine) return true;
 	// If offline, save form in localstorage.
 	saveDataLocally(form);
@@ -29,6 +28,7 @@ function saveDataLocally(unserialized_form) {
 	try {
 		localStorage.setItem(timeStamp, serialized_form);
 		console.log('Saved locally: ' + timeStamp + ': ' + serialized_form);
+		alert('Thank you for your submission. The data is cached locally and will be send to taarifa as soon as you visit this page with internet connectivity.');
 	} catch (e) {
 		if (e == QUOTA_EXCEEDED_ERR) {
 			console.log('Quota exceeded!');
@@ -78,19 +78,24 @@ function goneOffline(){
 // Notifies users about beeing online.
 function notifyUserIsOnline() {
 	var status = document.querySelector('#status');
-	status.className = 'online';
-	status.innerHTML = 'Online';
+	var offlineData = document.querySelector('#offlineData');
+	offlineData.className = 'online';
+	status.innerHTML = 'Connected';
 }
 // Notifies users about beeing offline.
 function notifyUserIsOffline() {
 	var status = document.querySelector('#status');
-	status.className = 'offline';
+	var offlineData = document.querySelector('#offlineData');
+	offlineData.className = 'offline';
 	status.innerHTML = 'Offline';
 }
 // Notifies users about how many items are stored offline ready to be send.
 function updateCount() {
 	var length = window.localStorage.length;
-	document.querySelector('#local-count').innerHTML = length;
+	if (length > 0)
+	  document.querySelector('#local-count').innerHTML = '(' + length + ' item(s) cached)';
+	else 
+		document.querySelector('#local-count').innerHTML = '';
 }
 
 //called when DOM has fully loaded
@@ -98,7 +103,7 @@ function loaded() {
 	if(typeof(window.localStorage) == 'undefined') return false;
 	
 	// Create DOM nodes.
-	$('#mainmenu').append('<div id="offlineData"><div id="local-count"></div><div id="status"></div></div>');
+	$('.background').prepend('<div id="offlineData"><span id="status"></span> <span id="local-count"></span></div>');
 
 	// Update count.
 	updateCount();

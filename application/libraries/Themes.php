@@ -87,6 +87,11 @@ class Themes_Core {
 		{
 			$core_css .= html::stylesheet($this->css_url."media/css/picbox/picbox","",true);
 		}
+
+		if ($this->offline_capability)
+		{
+			$core_css .= html::stylesheet($this->css_url."media/css/offlineData","",true);
+		}
 		
 		if ($this->videoslider_enabled)
 		{

@@ -26,6 +26,7 @@ media/img/openlayers/zoom-plus-mini.png
 #style sheets
 media/css/jquery-ui-themeroller.css
 media/css/openlayers.css
+media/css/offlineData.css
 themes/default/css/style.css
 
 #one of the following files causes my chromium version to crash, disabled for now
