@@ -32,3 +32,6 @@ Options -Indexes
 
 #Follow symlinks
 Options +FollowSymlinks
+
+# Set mime typ for appcache manifest
+AddType text/cache-manifest .appcache
