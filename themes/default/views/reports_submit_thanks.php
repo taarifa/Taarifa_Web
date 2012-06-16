@@ -19,8 +19,8 @@
 		</div>
 
 		<div id="donate">
-			<h2 id="donor-head">&pound;30 will pay for 2 hours of help looking for job</h2>
-			<p id="donor-txt">96% of homeless people are unemployed. We helped over 80 people find employment last year.</p>
+			<h2 id="donor-head">&pound;6 gives a room for the night</h2>
+			<p id="donor-txt">Right at the centre of what we do and the quickest way to make an impact.</p>
 			<a href="http://uk.ImpulsePay.com/payforit?RouteID=6167">Pay using your phone<br/><img src="<?php echo url::file_loc('img'); ?>media/img/payforit.png" /></a> 
 		</div>
 		<p>So far this month people like you have raised &pound;<span class="number">513.37</span>
@@ -33,108 +33,91 @@
 		// do something..
 		//alert("The value is "+slider_value);
 		//console.log("Slider value switched as "+slider_value);
-			
 		switch(slider_value)
 		{
 			case "1":
 				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-txt").html("Imagine trying to survive without a bank account");
 				//console.log("Slider value switched as "+slider_value);
 				
 				break;
 			case "2":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " gives 30 minutes of basic literacy training");
+				$("#donor-txt").html("A huge obstacle for 58% of homeless people");
 				
 				break;
 			case "3":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " Pays for a call home to loved ones");
+				$("#donor-txt").html("Sometimes that's all someone needs.");
 				
 				break;
 			case "4":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " One load of washing");
+				$("#donor-txt").html("A clean shirt can make a huge difference");
 				
 				break;
 			case "5":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " is a mobile top up");
+				$("#donor-txt").html("A mobile phone without credit is an expensive brick.");
 				
 				break;
 			case "6":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " gives a room for the night");
+				$("#donor-txt").html("Right at the centre of what we do and the quickest way to make an impact.");
 				
 				break;
 			case "7":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " will staff a phoneline for an hour");
+				$("#donor-txt").html("Waiting on hold is irritating. Waiting on hold outside in the snow is bloody miserable.");
 				
 				break;
 			case "8":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " is a visit from a mental health nurse");
+				$("#donor-txt").html(" How do you think you'd feel if you were sleeping rough?");
 				
 				break;
 			case "9":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " pays for Training volunteers");
+				$("#donor-txt").html("nobody deserves to be messed around by untrained 'helpers'");
 				
 				break;
 			case "10":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " pays for a replacement Birth certificate");
+				$("#donor-txt").html("Proving who you are is vital to accessing services");
 				
 				break;
 			case "11":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " goes towards Skills training and certification");
+				$("#donor-txt").html("98% of homeless people have low qualifications");
 				
 				break;
 			case "12":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " for coach back to home and friends");
+				$("#donor-txt").html("Returning home can do wonders");
 				
 				break;
 			case "13":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " for a check up for a loved pet dog");
+				$("#donor-txt").html("Sometimes the only unconditional love a homeless person has.");
 				
 				break;
 			case "14":
-				$("#donor-head").html("&pound;"+slider_value + " is enough to open a basic bank account");
-				$("#donor-txt").html("Once a basic bank account is opened, it's easier for someone to earn money legitimately");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " to pay for a health check at one of our centres");
+				$("#donor-txt").html("Sleeping rough is hard on your health and no home address = no GP");
 				
 				break;
 			case "15":
-				$("#donor-head").html("&pound;"+slider_value + " is lots of money");
-				$("#donor-txt").html("blah");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
+				$("#donor-head").html("&pound;"+slider_value + " is enough to give a homeless person a mobile phone");
+				$("#donor-txt").html("No landline, no home address. A mobile is often the only link to services and family.");
 				
 				break;
 			
 			default:
 				$("#donor-head").html("&pound;"+slider_value + " is lots of money");
 				$("#donor-txt").html("blah");
-				$("#donor-script").attr("data-label-6167", "Donate &pound;"+slider_value+" To everyone in");
 				
-		}
-					
+		}	
+						
 	});
 
 </script>
