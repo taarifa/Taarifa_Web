@@ -8,7 +8,7 @@
 	</div>
 	<div data-role="content">	
 		<p>Thank You! Just using this service you have made a real positive impact on someone's life.</p>
-		<p><a href="">Find out more about local homeless services</a>.</p>
+		<p><a href="<?php echo url::file_loc('img'); ?>associations.html">Find out more about local homeless services</a>.</p>
 		<p>Or play with the slider to see what difference a small donation can make.</p>
 		
 		<div id="div-slider">
