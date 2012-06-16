@@ -33,7 +33,7 @@
 			<div class="row">
 				<input type="hidden" name="form_id" id="form_id" value="<?php echo $id?>">
 			</div>
-			<div class="report_left">
+			<div class="report_left wdif">
 				<div class="report_row">
 					<?php if(count($forms) > 1){ ?>
 					<div class="row">
@@ -170,8 +170,8 @@
 						</div>
 					</div>
 					<div class="report-find-location">
-					    <div id="panel" class="olControlEditingToolbar"></div>
-						<div class="btns" style="float:left;">
+					    <div id="panel" class="olControlEditingToolbar wdif"></div>
+						<div class="btns wdif" style="float:left;">
 							<ul style="padding:4px;">
 								<li><a href="#" class="btn_del_last"><?php echo strtoupper(Kohana::lang('ui_main.delete_last'));?></a></li>
 								<li><a href="#" class="btn_del_sel"><?php echo strtoupper(Kohana::lang('ui_main.delete_selected'));?></a></li>
@@ -186,13 +186,13 @@
 					</div>
 				</div>
 				<?php Event::run('ushahidi_action.report_form_location', $id); ?>
-				<div class="report_row">
+				<div class="report_row wdif">
 					<h4><?php echo Kohana::lang('ui_main.reports_location_name'); ?><br /><span class="example"><?php echo Kohana::lang('ui_main.detailed_location_example'); ?></span></h4>
 					<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
 				</div>
 
 				<!-- News Fields -->
-				<div id="divNews" class="report_row">
+				<div id="divNews" class="report_row wdif">
 					<h4><?php echo Kohana::lang('ui_main.reports_news'); ?></h4>
 					<?php
 						$this_div = "divNews";
@@ -229,7 +229,7 @@
 
 
 				<!-- Video Fields -->
-				<div id="divVideo" class="report_row">
+				<div id="divVideo" class="report_row wdif">
 					<h4><?php echo Kohana::lang('ui_main.external_video_link'); ?></h4>
 					<?php
 						$this_div = "divVideo";
