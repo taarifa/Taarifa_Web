@@ -12,7 +12,7 @@
 		<input type="hidden" name="latitude" id="latitude" value="<?php echo $form['latitude']; ?>">
 		<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
 		<input type="hidden" name="country_name" id="country_name" value="<?php echo $form['country_name']; ?>" />
-		<input type="hidden" name="incident_zoom" id="incident_zoom" value="<?php echo $form['incident_zoom']; ?>" />
+	<input type="hidden" name="incident_zoom" id="incident_zoom" value="<?php echo $form['incident_zoom']; ?>" />
 		<div class="big-block">
 			<h1><?php echo Kohana::lang('ui_main.reports_submit_new'); ?></h1>
 			<?php if ($form_error): ?>
@@ -33,8 +33,8 @@
 			<div class="row">
 				<input type="hidden" name="form_id" id="form_id" value="<?php echo $id?>">
 			</div>
-			<div class="report_left wdif">
-				<div class="report_row">
+			<div class="report_left">
+				<div class="report_row wdif">
 					<?php if(count($forms) > 1){ ?>
 					<div class="row">
 						<h4><span><?php echo Kohana::lang('ui_main.select_form_type');?></span>
@@ -49,13 +49,13 @@
 					<label for="incident_title" class="inlined" id="incident_title_label"><?php echo Kohana::lang('ui_main.reports_title'); ?></label>
 					<?php print form::input('incident_title', $form['incident_title'], ' class="text long"'); ?>
 				</div>
-				<div class="report_row">
+				<div class="report_row wdif">
 					<label for="incident_description" class="inlined"><?php echo Kohana::lang('ui_main.reports_description'); ?></label>
 					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long text" ') ?>
 				</div>
-				<div class="report_row" id="datetime_default">
+				<div class="report_row wdif" id="datetime_default">
 					<h4>
-						<a href="#" id="date_toggle" class="show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a>
+						<a href="#" id="date_toggle" class="wdif show-more"><?php echo Kohana::lang('ui_main.modify_date'); ?></a>
 						<?php echo Kohana::lang('ui_main.date_time'); ?>: 
 						<?php echo Kohana::lang('ui_main.today_at')." "."<span id='current_time'>".$form['incident_hour']
 							.":".$form['incident_minute']." ".$form['incident_ampm']."</span>"; ?>
@@ -102,7 +102,7 @@
 					</div>
 					<div style="clear:both; display:block;" id="incident_date_time"></div>
 				</div>
-				<div class="report_row">
+				<div class="report_row wdif">
 					<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?></h4>
 					<div class="report_category" id="categories">
 					<?php
@@ -124,7 +124,7 @@
 
 				<?php echo $custom_forms ?>
 
-				<div class="report_optional">
+				<div class="report_optional wdif">
 					<h3><?php echo Kohana::lang('ui_main.reports_optional'); ?></h3>
 					<div class="report_row">
             <label for="person_first" class="inlined"><?php echo Kohana::lang('ui_main.reports_first'); ?></label>
