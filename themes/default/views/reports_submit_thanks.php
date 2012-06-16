@@ -2,21 +2,12 @@
 	<div class="content-bg">
 		<!-- start block -->
 		<div class="big-block">
-			<h1><?php echo Kohana::lang('ui_main.reports_submit_new');?></h1>
-			<!-- green-box -->
-			<div class="green-box">
-				<h3><?php echo Kohana::lang('ui_main.reports_submitted');?></h3>
+ Thanks for getting in touch through “EveryoneIn”. The information has been submitted to the local duty street team. They will be establishing contact as soon as they can
+Would you like to be kept up to date as to their progress?” [tickbox y/n]
+In the area you reported there are [x] services for homeless individuals.
+The services are [list of services]
+In the area you reported there are no emergency response services for homeless individuals, however [the local authority name] homeless unit have now been informed. [if tickbox = y then” You will receive a report of action taken within five days]
 
-				<div class="thanks_msg"><a href="<?php echo
-					url::site().'reports' ?>"><?php echo Kohana::lang('ui_main.reports_return');?></a><br /><br /><br />
-					<?php echo Kohana::lang('ui_main.feedback_reports');?><br /><br />
-					<?php 
-					print form::open('http://www.surveymonkey.com/s/SM7LWGB', array('target'=>'_blank'));
-					print form::hidden('alert_code', $_SERVER['SERVER_NAME']);
-					print "&nbsp;&nbsp;";
-					print form::submit('button', Kohana::lang('ui_main.feedback'), ' class=btn_gray ');
-					print form::close();
-					?>
 				</div>
 			</div>
 		</div>
