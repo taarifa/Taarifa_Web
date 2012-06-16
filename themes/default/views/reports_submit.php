@@ -182,7 +182,7 @@
 						<?php print form::input('location_find', '', ' title="'.Kohana::lang('ui_main.location_example').'" class="findtext"'); ?>
 						<div style="float:left;margin:9px 0 0 5px;"><input type="button" name="button" id="button" value="<?php echo Kohana::lang('ui_main.find_location'); ?>" class="btn_find" /></div>
 						<div id="find_loading" class="report-find-loading"></div>
-						<div style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
+						<div class="wdif" style="clear:both;" id="find_text"><?php echo Kohana::lang('ui_main.pinpoint_location'); ?>.</div>
 					</div>
 				</div>
 				<?php Event::run('ushahidi_action.report_form_location', $id); ?>
@@ -268,7 +268,7 @@
 				<?php Event::run('ushahidi_action.report_form_after_video_link'); ?>
 
 				<!-- Photo Fields -->
-				<div id="divPhoto" class="report_row">
+				<div id="divPhoto" class="wdif report_row">
 					<h4><?php echo Kohana::lang('ui_main.reports_photos'); ?></h4>
 					<?php
 						$this_div = "divPhoto";
