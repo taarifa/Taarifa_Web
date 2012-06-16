@@ -80,6 +80,12 @@
 					<?php print form::input('location_name', $form['location_name'], ' class="text long"'); ?>
 				</div>
 
+				<!--Hidden fields-->
+				<!--
+ 				<input name="incident_title" id="incident_title" type="hidden" value="Example" />
+				<input name="incident_description" id="incident_description" type="hidden" value="Example" />
+				<input name="categories" id="categories" type="hidden" value="Example"/>
+				-->
 				<!-- News Fields -->
 				<div id="divNews" class="report_row wdif">
 					<h4><?php echo Kohana::lang('ui_main.reports_news'); ?></h4>
@@ -211,11 +217,11 @@
 					</div>
 					<?php } ?>
 					<label for="incident_title" class="inlined" id="incident_title_label"><?php echo Kohana::lang('ui_main.reports_title'); ?></label>
-					<?php print form::input('incident_title', $form['incident_title'], ' class="text long"'); ?>
+					<?php print form::input('incident_title', 'Title', ' class="text long"'); ?>
 				</div>
 				<div class="report_row wdif">
 					<label for="incident_description" class="inlined"><?php echo Kohana::lang('ui_main.reports_description'); ?></label>
-					<?php print form::textarea('incident_description', $form['incident_description'], ' rows="10" class="textarea long text" ') ?>
+					<?php print form::textarea('incident_description', 'Description', ' rows="10" class="textarea long text" ') ?>
 				</div>
 				<div class="report_row wdif" id="datetime_default">
 					<h4>
@@ -266,17 +272,16 @@
 					</div>
 					<div style="clear:both; display:block;" id="incident_date_time"></div>
 				</div>
-				<div class="report_row wdif">
-					<h4><?php echo Kohana::lang('ui_main.reports_categories'); ?></h4>
+				<div class="report_row">
+					<h4>Gender</h4>
 					<div class="report_category" id="categories">
 					<?php
 						$selected_categories = (!empty($form['incident_category']) AND is_array($form['incident_category']))
 							? $selected_categories = $form['incident_category']
 							: array();
-							
 						$columns = 2;
 						echo category::tree($categories, $selected_categories, 'incident_category', $columns);
-						?>
+					?>
 					</div>
 				</div>
 
