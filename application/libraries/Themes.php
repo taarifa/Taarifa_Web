@@ -101,6 +101,8 @@ class Themes_Core {
 		{
 			$core_css .= html::stylesheet($this->css_url."themes/".$site_style."/style.css");
 		}
+    # HACK for Terence's stuff
+		//$core_css .= html::stylesheet($this->css_url."media/css/jquery.mobile-1.1.0.min.css");
 		
 		// Render CSS
 		$plugin_css = plugin::render('stylesheet');
@@ -175,6 +177,9 @@ class Themes_Core {
 		{
 			$core_js .= html::script($theme_js,"",true);
 		}
+    # HACK: just to make sure Terence's code works
+    //$core_js .= html::script($this->js_url."media/js/jquery-1.7.1.min.js");
+    //$core_js .= html::script($this->js_url."media/js/jquery.mobile-1.1.0.min.js");
 		
 		// Inline Javascript
 		$inline_js = "<script type=\"text/javascript\">
