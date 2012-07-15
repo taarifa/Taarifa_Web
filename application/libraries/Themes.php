@@ -23,6 +23,7 @@ class Themes_Core {
 	public $treeview_enabled = false;
 	public $validator_enabled = false;
 	public $photoslider_enabled = false;
+ 	public $offline_capability = true;
 	public $videoslider_enabled = false;
 	public $colorpicker_enabled = false;
 	public $site_style = false;
@@ -156,6 +157,10 @@ class Themes_Core {
 		{
 			$core_js .= html::script($this->js_url."media/js/picbox", true);
 		}
+		if ($this->offline_capability)
+		{
+			$core_js .= html::script($this->js_url."media/js/offlineform.jquery", true);
+	 	}
 
 		if($this->videoslider_enabled )
 		{
@@ -180,7 +185,7 @@ class Themes_Core {
 		$inline_js = "<script type=\"text/javascript\">
                         <!--//
 function runScheduler(img){img.onload = null;img.src = '".url::site().'scheduler'."';}
-			".'$(document).ready(function(){$(document).pngFix();});'.$this->js.
+			".'$(document).ready(function(){$(document).pngFix(); $("#reportForm").offlineForm(); });'.$this->js.
                         "//-->
                         </script>";
 		

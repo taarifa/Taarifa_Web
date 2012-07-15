@@ -447,6 +447,7 @@ class reports_Core {
 
 		// c. Photos
 		$filenames = upload::save('incident_photo');
+		if (empty($filenames)) $filenames = array();
 		$i = 1;
 		foreach ($filenames as $filename)
 		{
