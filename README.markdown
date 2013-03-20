@@ -21,7 +21,7 @@ To install the platform on your computer/server, the target system must meet the
 
 Required Extensions
 -------------------
-The follwing is a list of PHP extensions that must be installed on your server in order for Taarife to run properly:
+The follwing is a list of PHP extensions that must be installed on your server in order for Taarifa to run properly:
 
 * PCRE (http://php.net/pcre) must be compiled with –enable-utf8 and –enable-unicode-properties for UTF-8 functions to work properly.
 * iconv (http://php.net/iconv) is required for UTF-8 transliteration.
