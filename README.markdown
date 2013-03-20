@@ -11,7 +11,7 @@ To install the platform on your computer/server, the target system must meet the
 
 * PHP version 5.2.3 or greater
 * MySQL version 5.0 or greater
-* An HTTP Server. Kohana, which Ushahidi is built on, is known to work with the following web servers:
+* An HTTP Server. Ushahidi uses the Kohana web framework, which Taarifa is built on. Kohana is known to work with the following web servers:
     - Apache 1.3+
     - Apache2.0+
     - lighttpd
@@ -62,7 +62,7 @@ Installation
 
         unzip Taarifa_Web-xxxx.zip
     
-    This will create a new directory Ushahidi_Web-xxxx containing all the Ushahidi platform files and directories - Move the contents of this directory
+    This will create a new directory Taarifa_Web-xxxx containing all the Taarifa platform files and directories - Move the contents of this directory
     into a directory within your webserver's document root or your public HTML directory.
 
 * ####Ensure the following directories are writable (i.e. have their permission values set to 777)
@@ -84,8 +84,8 @@ Installation
         
     #####NOTE: The process of configuring file permissions is different for various operating systems. Here are some helpful links about permissions for the Windows (http://support.microsoft.com/kb/308419) and Unix (http://www.washington.edu/computing/unix/permissions.html) operating systems.
 
-* ####Create the Ushahidi database
-    Ushahidi stores all its information in a database. You must therefore create this database in order to install Ushahidi. This is done as follows:
+* ####Create the Taarifa database
+    Taarifa stores all its information in a database. You must therefore create this database in order to install Taarifa. This is done as follows:
     
         mysqladmin -u 'username' -p create 'databasename'
     
@@ -104,7 +104,7 @@ Installation
     - 'username@localhost' is the name of your MySQL account
     - 'password' is the password required for that username
 
-    #####NOTE: Your account must have all the privileges listed above in order to run Ushahidi on your webserver.
+    #####NOTE: Your account must have all the privileges listed above in order to run Taarifa on your webserver.
 
 * ####Run the install script
     To run the install script, point your browser to the base url of your website: (e.g. http://www.example.com).
