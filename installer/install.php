@@ -70,12 +70,12 @@ class Install
 		if(!file_exists('../.htaccess')){
 			$form->set_error("load_htaccess_file","<strong>Oops!</strong> I need a file called " .
 					"<code>.htaccess</code> to work
-			with. Please make sure this file is in the root directory of your Ushahidi files.");
+			with. Please make sure this file is in the root directory of your Taarifa files.");
 		}
 		
 		if( !is_writable('../.htaccess')) {
 			$form->set_error('htaccess_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to the <code>.htaccess</code> file. " .
+			"<strong>Oops!</strong> Taarifa is unable to write to the <code>.htaccess</code> file. " .
 			"Please change the permissions of that file to allow write access (777).  " .
 			"<p>Here are instructions for changing file permissions:</p>" .
 			"<ul>" .
@@ -86,7 +86,7 @@ class Install
 
 		if( !is_writable('../application/config')) {
 			$form->set_error('permission',
-			"<strong>Oops!</strong> Ushahidi is trying to create and/or edit a file called \"" .
+			"<strong>Oops!</strong> Taarifa is trying to create and/or edit a file called \"" .
 			"database.php\" and is unable to do so at the moment. This is probably due to the fact " .
 			"that your permissions aren't set up properly for the <code>config</code> folder. " .
 			"Please change the permissions of that folder to allow write access (777).	" .
@@ -99,7 +99,7 @@ class Install
 		
 		if( !is_writable('../application/config/config.php')) {
 			$form->set_error('config_perm',
-			"<strong>Oops!</strong> Ushahidi is trying to edit a file called \"" .
+			"<strong>Oops!</strong> Taarifa is trying to edit a file called \"" .
 			"config.php\" and is unable to do so at the moment. This is probably due to the fact " .
 			"that your permissions aren't set up properly for the <code>config.php</code> file. " .
 			"Please change the permissions of that folder to allow write access (777).	" .
@@ -110,7 +110,7 @@ class Install
 			"</ul>"
 			/* CB: Commenting this out... I think it's better if we just have them change the permissions of the specific
 				files and folders rather than all the files
-			"Alternatively, you could make the webserver own all the ushahidi files. On unix usually, you" .
+			"Alternatively, you could make the webserver own all the Taarifa files. On unix usually, you" .
 			"issue this command <code>chown -R www-data:ww-data</code>");
 			*/
 			);
@@ -571,7 +571,7 @@ class Install
 	}
 	
 	/**
-	 * check if ushahidi has been installed.
+	 * check if Taarifa has been installed.
 	 */
 	public function is_ushahidi_installed()
 	{
@@ -629,37 +629,37 @@ class Install
 		
 		if( !is_writable('../.htaccess')) {
 			$form->set_error('htaccess_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to your <code>.htaccess</code> file. " .
+			"<strong>Oops!</strong> Taarifa is unable to write to your <code>.htaccess</code> file. " .
 			"Please change the permissions of that file to allow write access (777).  ");
 		}
 
 		if( !is_writable('../application/config')) {
 			$form->set_error('config_folder_perm',
-			"<strong>Oops!</strong> Ushahidi needs the <code>application/config</code> folder to be writable. ".
+			"<strong>Oops!</strong> Taarifa needs the <code>application/config</code> folder to be writable. ".
 			"Please change the permissions of that folder to allow write access (777).	");
 		}
 		
 		if( !is_writable('../application/config/config.php')) {
 			$form->set_error('config_file_perm',
-			"<strong>Oops!</strong> Ushahidi is unable to write to <code>application/config/config.php</code> file. " .
+			"<strong>Oops!</strong> Taarifa is unable to write to <code>application/config/config.php</code> file. " .
 			"Please change the permissions of that file to allow write access (777).  ");
 		}
 		
 		if( !is_writable('../application/cache')) {
 			$form->set_error('cache_perm',
-			"<strong>Oops!</strong> Ushahidi needs <code>application/cache</code> folder to be writable. ".
+			"<strong>Oops!</strong> Taarifa needs <code>application/cache</code> folder to be writable. ".
 			"Please change the permissions of that folder to allow write access (777).	");
 		}
 		
 		if( !is_writable('../application/logs')) {
 			$form->set_error('logs_perm',
-			"<strong>Oops!</strong> Ushahidi needs <code>application/logs</code> folder to be writable. " .
+			"<strong>Oops!</strong> Taarifa needs <code>application/logs</code> folder to be writable. " .
 			"Please change the permissions of that folder to allow write access (777). ");
 		}
 		
 		if( !is_writable('../media/uploads')) {
 			$form->set_error('uploads_perm',
-			"<strong>Oops!</strong> Ushahidi needs <code>media/uploads</code> folder to be writable. " .
+			"<strong>Oops!</strong> Taarifa needs <code>media/uploads</code> folder to be writable. " .
 			"Please change the permissions of that folder to allow write access (777). ");
 		}
 		
@@ -720,32 +720,32 @@ class Install
 		
 		if( ! $modules->isLoaded('curl')) {
 			$form->set_error('curl',
-			"<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/curl\" target=\"_blank\">cURL</a> for getting or sending files using the URL syntax. ");
+			"<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/curl\" target=\"_blank\">cURL</a> for getting or sending files using the URL syntax. ");
 		}
 		
 		if( ! $modules->isLoaded('pcre')) {
 			$form->set_error('pcre',
-			"<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/pcre\" target=\"_blank\">PCRE</a> compiled with <code>–enable-utf8</code> and <code>–enable-unicode-properties</code> for UTF-8 functions to work properly. ");
+			"<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/pcre\" target=\"_blank\">PCRE</a> compiled with <code>–enable-utf8</code> and <code>–enable-unicode-properties</code> for UTF-8 functions to work properly. ");
 		}
 		
 		if( ! $modules->isLoaded('iconv')) {
 			$form->set_error('iconv',
-			"<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/iconv\" target=\"_blank\">iconv</a> for UTF-8 transliteration. ");
+			"<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/iconv\" target=\"_blank\">iconv</a> for UTF-8 transliteration. ");
 		}
 		
 		if( ! $modules->isLoaded('mcrypt')) {
 			$form->set_error('mcrypt',
-			"<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/mcrypt\" target=\"_blank\">mcrypt</a> for encryption. ");
+			"<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/mcrypt\" target=\"_blank\">mcrypt</a> for encryption. ");
 		}
 		
 		if( ! $modules->isLoaded('SPL')) {
 			$form->set_error('spl',
-			"<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/spl\" target=\"_blank\">SPL</a> for several core libraries. ");
+			"<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/spl\" target=\"_blank\">SPL</a> for several core libraries. ");
 		}
 		
 		if ( ! $modules->isLoaded('mysql')) {
 		    $form->set_error('mysql',
-		    "<strong>Oops!</strong> Ushahidi needs <a href=\"http://php.net/mysql\" target=\"_blank\">MySQL</a> for database access. ");
+		    "<strong>Oops!</strong> Taarifa needs <a href=\"http://php.net/mysql\" target=\"_blank\">MySQL</a> for database access. ");
 		}
 		/**
 		 * error exists, have user correct them.
@@ -769,7 +769,7 @@ class Install
 			<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-				<title>Database Connections / Ushahidi Web Installer</title>
+				<title>Database Connections / Taarifa Web Installer</title>
 				<link href="../media/css/installer.css" rel="stylesheet" type="text/css" />
 			</head>
 			<script src="../media/js/jquery.js" type="text/javascript" charset="utf-8"></script>
@@ -781,7 +781,7 @@ HTML;
 	}
 	
 	/**
-	 * Gets the current directory ushahidi is installed in.
+	 * Gets the current directory Taarifa is installed in.
 	 */
 	public function _get_base_path($request_uri) {
 		return substr( substr($request_uri,0,stripos($request_uri,'/installer/')) ,1);
@@ -790,7 +790,7 @@ HTML;
 	
 	/**
 	 * Check if clean url can be enabled on the server so 
-	 * Ushahidi can emit clean URLs
+	 * Taarifa can emit clean URLs
 	 * 
 	 * @return boolean
 	 */
