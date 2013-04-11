@@ -351,7 +351,24 @@ class Reports_Controller extends Main_Controller {
 				Event::run('ushahidi_action.report_add', $incident);
 				Event::run('ushahidi_action.report_submit', $post);
 
-				url::redirect('reports/thanks');
+				echo "<br><br>";
+				
+				$arrayJSON = array();
+
+				foreach ($post as $key => $value) {
+					//echo $key;
+					//echo "<br>";
+					//echo $value;
+					//echo "<br>";
+					if($key === "latitude" || $key === "longitude" || $key === "incident_title" ){
+						$arrayJSON[$key] = $value;
+						//var_dump($arrayJSON);
+						}
+
+					//array_push($arrayJSON, $value);
+				}
+				echo json_encode($arrayJSON);
+				//url::redirect('reports/thanks');
 			}
 
 			// No! We have validation errors, we need to show the form again, with the errors
